@@ -15,7 +15,7 @@ public class SchoolhubDb
 
     public User GetUserByUsernamePassword(string username, string password)
     {
-        string query = "SELECT `User`.`Id`, `Username`, `Email`, `FirstName`, `LastName`, `Role`.`Name` FROM `User` LEFT JOIN `Role` ON `User`.`RoleId` = `Role`.`Id` WHERE `Username` = @username AND `Password` = @password";
+        string query = "SELECT `User`.`Id`, `Username`, `Email`, `FirstName`, `LastName`, `Role`.`Name`, `RoleId` FROM `User` LEFT JOIN `Role` ON `User`.`RoleId` = `Role`.`Id` WHERE `Username` = @username AND `Password` = @password";
         MySqlConnection conn = null;
         MySqlCommand command = null;
         MySqlDataReader reader = null;
@@ -43,12 +43,56 @@ public class SchoolhubDb
                 user.FirstName = reader.GetValue(3).ToString();
                 user.LastName = reader.GetValue(4).ToString();
                 user.Role = reader.GetValue(5).ToString();
+                user.RoleId = Convert.ToInt32(reader.GetValue(6));
             }
             if(user.Username == null)
             {
                 return null;
             }
             return user;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
+        finally
+        {
+            // We must assure the connection gets closed, even in the event of an exception.
+            if (conn != null && conn.State != ConnectionState.Closed)
+            {
+                conn.Close();
+            }
+        }
+        return null;
+    }
+
+    public string AddUser(User user, string password)
+    {
+        string query = "INSERT INTO `User`(`Username`, `Password`, `Email`, `FirstName`, `LastName`, `RoleId`) VALUES (@username,@password,@email,@firstName,@lastName,@roleId)";
+        MySqlConnection conn = null;
+        MySqlCommand command = null;
+        MySqlDataReader reader = null;
+        try
+        {
+            conn = new MySqlConnection(connectionString);
+            conn.Open();
+            command = new MySqlCommand("SELECT * FROM `User` WHERE `Username` = @username", conn);
+            command.Parameters.AddWithValue("@username", user.Username);
+            reader = command.ExecuteReader();
+            while(reader.Read())
+            {
+                return "A user with the username " + user.Username + " already exists.";
+            }
+            reader.Close();
+            command = new MySqlCommand(query, conn);
+            command.Parameters.AddWithValue("@username", user.Username);
+            command.Parameters.AddWithValue("@password", password);
+            command.Parameters.AddWithValue("@email", user.Email);
+            command.Parameters.AddWithValue("@firstName", user.FirstName);
+            command.Parameters.AddWithValue("@lastName", user.LastName);
+            command.Parameters.AddWithValue("@roleId", user.RoleId);
+            command.ExecuteNonQuery();
+            return "";
         }
         catch (Exception ex)
         {
