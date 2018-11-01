@@ -15,7 +15,7 @@ public class SchoolhubDb
 
     public User GetUserByUsernamePassword(string username, string password)
     {
-        string query = "SELECT `User`.`Id`, `Username`, `Email`, `FirstName`, `LastName`, `Role`.`Name` FROM `User` LEFT JOIN `Role` ON `User`.`RoleId` = `Role`.`Id` WHERE `Username` = '" + username + "' AND `Password` = '" + password + "'";
+        string query = "SELECT `User`.`Id`, `Username`, `Email`, `FirstName`, `LastName`, `Role`.`Name` FROM `User` LEFT JOIN `Role` ON `User`.`RoleId` = `Role`.`Id` WHERE `Username` = @username AND `Password` = @password";
         MySqlConnection conn = null;
         MySqlCommand command = null;
         MySqlDataReader reader = null;
@@ -24,6 +24,8 @@ public class SchoolhubDb
             conn = new MySqlConnection(connectionString);
             conn.Open();
             command = new MySqlCommand(query, conn);
+            command.Parameters.AddWithValue("@username", username);
+            command.Parameters.AddWithValue("@password", password);
             reader = command.ExecuteReader();
             User user = new User();
             while (reader.Read())
