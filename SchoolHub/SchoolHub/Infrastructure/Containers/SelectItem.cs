@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace SchoolHub.SchoolHub_Infrastructure.Containers
+namespace SchoolHub.Infrastructure.Containers
 {
-    class SelectItem
+    public class SelectItem
     {
         public string Label { get; set; }
         public int Value { get; set; }

@@ -1,8 +1,10 @@
 {
   "ExpandedNodes": [
     "",
-    "\\SchoolHub"
+    "\\SchoolHub",
+    "\\SchoolHub\\SchoolHub",
+    "\\SchoolHub\\SchoolHub\\Infrastructure\\Containers"
   ],
-  "SelectedNode": "\\SchoolHub\\SchoolHub",
+  "SelectedNode": "\\SchoolHub\\SchoolHub\\SchoolHub.csproj",
   "PreviewInSolutionExplorer": false
 }

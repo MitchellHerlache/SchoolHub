@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace SchoolHub.SchoolHub_Infrastructure.Containers
+namespace SchoolHub.Infrastructure.Containers
 {
-    class Class
+    public class Class
     {
         public int Id { get; set; }
         public string Number { get; set; }
