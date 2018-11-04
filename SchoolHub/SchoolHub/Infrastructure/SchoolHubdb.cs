@@ -27,12 +27,12 @@ public class SchoolhubDb
             command.Parameters.AddWithValue("@teacherId", teacherId);
             reader = command.ExecuteReader();
             List<Class> classes = new List<Class>();
-            Class newClass;
+            Class newClass = new Class();
             while (reader.Read())
             {
                 newClass.Id = Convert.ToInt32(reader.GetValue(0));
-                newClass.Number = reader.GetValue(1).toString();
-                newClass.Name = reader.GetValue(2).toString();
+                newClass.Number = reader.GetValue(1).ToString();
+                newClass.Name = reader.GetValue(2).ToString();
                 newClass.Description = reader.GetValue(3).ToString();
                 newClass.StartDate = reader.GetDateTime(4);
                 newClass.EndDate = reader.GetDateTime(5);
