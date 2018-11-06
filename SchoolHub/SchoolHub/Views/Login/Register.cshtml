@@ -1,0 +1,67 @@
+﻿@{
+    ViewBag.Title = "School Hub Registration";
+}
+
+<div class="jumbotron">
+    <h1>Register for School Hub</h1>
+</div>
+<div class="container">
+    <form>
+        <div class="form-group">
+            <label for="firstName">First Name:</label>
+            <input class="form-control" type="text" name="firstName" placeholder="Enter your first name" required></input>
+        </div>
+
+        <div class="form-group">
+            <label for="lastName">Last Name:</label>
+            <input class="form-control" type="text" name="lastName" placeholder="Enter your last name"></input>
+        </div>
+
+        <div class="form-group">
+            <label for="newEmail">Email Address:</label>
+            <input class="form-control" type="email" name="newEmail" placeholder="Enter your email address"></input>
+        </div>
+
+        <div class="form-group pass_show">
+            <label for="newPassword">Password:</label>
+            <input class="form-control" data-toggle="password" id="newPassword" type="password" name="password" placeholder="Enter your password">
+        </div>
+
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign In</button>
+
+
+    </form>
+
+    <div class="container login-link">
+        <p>Already have an account? <a asp-page="/Login">Login Now</a>.</p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-3">
+        <h2>Application uses</h2>
+        <ul>
+            <li>Sample pages using ASP.NET Core Razor Pages</li>
+            <li>Theming using <a href="https://go.microsoft.com/fwlink/?LinkID=398939">Bootstrap</a></li>
+        </ul>
+    </div>
+    <div class="col-md-3">
+        <h2>How to</h2>
+        <ul>
+            <li>You can sign up by selecting the Register at the top of the page, all you need to do is create an account, and we'll get your scheduling on track</li>
+            <li><a href="https://go.microsoft.com/fwlink/?linkid=852130">Working with Razor Pages.</a></li>
+        </ul>
+    </div>
+    <div class="col-md-3">
+        <h2>Overview</h2>
+        <ul>
+            <li>Below are some good resources of how we can create different sections of our site using ASP.NET core.</li>
+        </ul>
+    </div>
+    <div class="col-md-3">
+        <h2>Run &amp; Deploy</h2>
+        <ul>
+            <li><a href="https://go.microsoft.com/fwlink/?LinkID=517851">Run your app</a></li>
+        </ul>
+    </div>
+</div>
