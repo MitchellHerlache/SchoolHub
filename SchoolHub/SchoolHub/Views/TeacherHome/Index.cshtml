@@ -57,47 +57,41 @@
             <!-- Goes at the top of the page. This should always be consitant with the footer -->
             <thead>
                 <tr>
-                    @*<th>Id</th>*@
                     <th>Class Identifier</th>
                     <th>Class Name</th>
-                    <th>Instructor</th>
-                    <th>Description</th>
-                    <th>Drop Class</th>
+                    <th>Class Description</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Teacher Name</th>
+                    <th>School Name</th>
                 </tr>
             </thead>
 
             <!-- Content will be dynamically entered in here -->
             <tbody>
+                @for (int i = 0; i < Model.Classes.Count; i++)
+                {
                 <tr>
-                    <td>CS321</td>
-                    <td>Algorithms</td>
-                    <td>Example Professor</td>
-                    <td>This is a course about algorithms. It is very difficult but necessary to getting your CS degree.</td>
-                    <td>This would contain a button that allows the user to drop the class.</td>
+                    <td>@Html.DisplayFor(Model => Model.Classes[i].Number)</td>
+                    <td>@Html.DisplayFor(Model => Model.Classes[i].Name)</td>
+                    <td>@Html.DisplayFor(Model => Model.Classes[i].Description)</td>
+                    <td>@Html.DisplayFor(Model => Model.Classes[i].StartDate)</td>
+                    <td>@Html.DisplayFor(Model => Model.Classes[i].EndDate)</td>
+                    <td>@Html.DisplayFor(Model => Model.Classes[i].TeacherName)</td>
+                    <td>@Html.DisplayFor(Model => Model.Classes[i].SchoolName)</td>
                 </tr>
-                <tr>
-                    <td>CS480</td>
-                    <td>Special Topics in CS</td>
-                    <td>Example Professor</td>
-                    <td>Advanced problems in computer science.</td>
-                    <td>Drop Class 2</td>
-                </tr>
-                <tr>
-                    <td>CS499</td>
-                    <td>Practicum</td>
-                    <td>Example Professor</td>
-                    <td>Practicum in computer science.</td>
-                    <td>Drop Class 3</td>
-                </tr>
+                }
             </tbody>
 
             <tfoot>
                 <tr>
                     <th>Class Identifier</th>
                     <th>Class Name</th>
-                    <th>Instructor</th>
-                    <th>Description</th>
-                    <th>Drop Class</th>
+                    <th>Class Description</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Teacher Name</th>
+                    <th>School Name</th>
                 </tr>
             </tfoot>
         </table>
@@ -115,27 +109,27 @@
         <script src="https://cdn.datatables.net/responsive/2.2.1/js/responsive.bootstrap4.min.js"></script>
 
         <script>
-      $(document).ready(function () {
+            $(document).ready(function () {
 
-        var table = $('#example').DataTable({
-          responsive: {
-            details: {
-              display: $.fn.dataTable.Responsive.display.modal({
-                header: function (row) {
-                  var data = row.data();
-                  return 'Details for class # ' + data[0];
-                }
-              }),
-              renderer: $.fn.dataTable.Responsive.renderer.tableAll({
-                tableClass: 'table'
+                var table = $('#example').DataTable({
+                    responsive: {
+                        details: {
+                            display: $.fn.dataTable.Responsive.display.modal({
+                                header: function (row) {
+                                    var data = row.data();
+                                    return 'Details for class # ' + data[0];
+                                }
+                            }),
+                            renderer: $.fn.dataTable.Responsive.renderer.tableAll({
+                                tableClass: 'table'
 
-              })
-            }
-          },
-          colReorder: true,
-          // "order": [[3, "desc"]],
-        });
-      });
+                            })
+                        }
+                    },
+                    colReorder: true,
+                    // "order": [[3, "desc"]],
+                });
+            });
         </script>
     </div>
     <!-- End jumbotron -->

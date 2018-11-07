@@ -27,9 +27,10 @@ public class SchoolhubDb
             command = new MySqlCommand(query, conn);
             reader = command.ExecuteReader();
             List<Class> classes = new List<Class>();
-            Class newClass = new Class();
+            //Class newClass = new Class();
             while (reader.Read())
             {
+                Class newClass = new Class();
                 newClass.Id = Convert.ToInt32(reader.GetValue(0));
                 newClass.Number = reader.GetValue(1).ToString();
                 newClass.Name = reader.GetValue(2).ToString();
@@ -73,9 +74,10 @@ public class SchoolhubDb
             command.Parameters.AddWithValue("@teacherId", teacherId);
             reader = command.ExecuteReader();
             List<Class> classes = new List<Class>();
-            Class newClass = new Class();
+            //Class newClass = new Class();
             while (reader.Read())
             {
+                Class newClass = new Class();
                 newClass.Id = Convert.ToInt32(reader.GetValue(0));
                 newClass.Number = reader.GetValue(1).ToString();
                 newClass.Name = reader.GetValue(2).ToString();
