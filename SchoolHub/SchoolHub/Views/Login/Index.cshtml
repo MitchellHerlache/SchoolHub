@@ -41,6 +41,42 @@
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script type="text/javascript" src="~/Scripts/SchoolHubScripts/Login.js"></script>
-
+    <script>
+        $(document).ready(function () {
+    $("#submit").click(function (e) {
+        if ($("#username").val() == "")
+            alert("Username cannot be empty");
+        else if ($("#password").val() == "")
+            alert("Password cannot be empty");
+        else {
+            $.ajax({
+                type: "POST",
+                url: "/Login/CheckUserLogin",
+                contentType: "application/json; charset=utf-8",
+                data: '{"username":"' + $("#username").val() + '","password":"' + $("#password").val() + '"}',
+                dataType: "html",
+                success: function (result, status, xhr) {
+                    out = JSON.parse(result)
+                    if (out.message != "") {
+                        alert(out.message)
+                    } else {
+                        if (out.user.RoleId == 1) {
+                            var teacherId = out.user.Id;
+                            window.location.href = '@Url.Action("Index", "TeacherHome", new { username = , password =  })';
+                        } else {
+                            window.location.href = '@Url.Action("Index", "StudentHome")';
+                        }
+                    }
+                },
+                error: function (xhr, status, error) {
+                    alert("Issue occured while logging in")
+                }
+            });
+        }
+        return false;
+    });
+});
+  
+    </script>
 </body>
 </html>
