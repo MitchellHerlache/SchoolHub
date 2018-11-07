@@ -1,0 +1,64 @@
+﻿@{
+    ViewBag.Title = "School Hub Change Password";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="author" content="Josiah Poss">
+    <title>Change Password</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="jumbotron">
+            <div class="row">
+                <div class="col-md-6">
+                    <h1>Change your Password</h1>
+                </div>
+                <div class="col-md-6">
+                    <div class="vertical-menu">
+                        <a href="~/TeacherHome/Index" class="btn btn-primary">Go back</a>
+                    </div>
+                </div>
+            </div>
+
+            <form method="post">
+                <div class="form-group pass_show">
+                    <label>Current Password *</label>
+                    <input type="password" name="CurrentUserPassword" class="form-control"
+                           placeholder="Current Password" id="CurrentPassword" value="" required>
+                    <span class="help-block"></span>
+                </div>
+
+                <div class="form-group pass_show ">
+                    <label>New Password *</label>
+                    <input type="password" class="form-control" placeholder="Enter New password"
+                           name="NewPassword" id="NewPassword" value="" required>
+                    <span class="help-block"></span>
+                </div>
+
+                <div class="form-group pass_show ">
+                    <label>Confirm New Password *</label>
+                    <input type="password" name="ConfirmNewPassword" class="form-control"
+                           data-toggle="password" placeholder="Re-Enter new password"
+                           id="ConfirmNewPassword" value="" required>
+                    <span class="help-block"></span>
+                </div>
+
+                <p class="form" id="PasswordHint">The password must be at least 10 characters long and contain 1 number. </p>
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary" value="Update">Update Password</button>
+                    <input type="reset" class="btn btn-default" value="Reset">
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
