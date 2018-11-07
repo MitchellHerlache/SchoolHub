@@ -26,5 +26,16 @@ namespace SchoolHub.Controllers
             };
             return View(model);
         }
+
+        public ActionResult ChangePassword()
+        {
+            return View();
+        }
+
+
+        public ActionResult AddClass()
+        {
+            return View();
+        }
     }
 }

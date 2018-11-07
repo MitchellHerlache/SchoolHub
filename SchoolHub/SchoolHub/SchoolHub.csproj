@@ -159,8 +159,6 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\AddClassController.cs" />
-    <Compile Include="Controllers\ChangePasswordController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\RegisterController.cs" />
     <Compile Include="Controllers\StudentHomeController.cs" />
@@ -321,13 +319,12 @@
     <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Views\StudentHome\Index.cshtml" />
     <Content Include="Views\TeacherHome\Index.cshtml" />
-    <Content Include="Views\AddClass\Index.cshtml" />
-    <Content Include="Views\ChangePassword\Index.cshtml" />
+    <Content Include="Views\TeacherHome\ChangePassword.cshtml" />
+    <Content Include="Views\TeacherHome\AddClass.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="obj\Debug\TempPE\" />
-    <Folder Include="Views\NewFolder1\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
