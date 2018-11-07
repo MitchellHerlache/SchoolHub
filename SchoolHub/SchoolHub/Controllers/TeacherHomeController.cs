@@ -11,15 +11,17 @@ namespace SchoolHub.Controllers
     public class TeacherHomeController : Controller
     {
         // GET: TeacherHome
-        public ActionResult Index(string username, string password)
+        public ActionResult Index(string username)
         {
             SchoolhubDb db = new SchoolhubDb();
-            User user = db.GetUserByUsernamePassword(username, password);
+            string usersname = username.Split(':')[0];
+            string password = username.Split(':')[1];
+            User user = db.GetUserByUsernamePassword(usersname, password);
             TeacherHomeModel model = new TeacherHomeModel
             {
                 Classes = db.GetClassesByTeacherId(user.Id),
-                Events = null,
-                Schools = null,
+                Events = new List<Event>(),
+                Schools = new List<SelectItem>(),
                 User = user
             };
             return View(model);

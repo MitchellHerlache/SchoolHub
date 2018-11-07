@@ -62,10 +62,12 @@
                     } else {
                         if (out.user.RoleId == 1) {
                             var teacherId = out.user.Id;
-                            window.location.href = '@Url.Action("Index", "TeacherHome", new { username = , password =  })';
+                            var url = '@Url.Action("Index", "TeacherHome")?username=' + $("#username").val() + ':' + $("#password").val();
+
                         } else {
-                            window.location.href = '@Url.Action("Index", "StudentHome")';
+                            var url = '@Url.Action("Index", "StudentHome")';
                         }
+                        window.location.href = url;
                     }
                 },
                 error: function (xhr, status, error) {
