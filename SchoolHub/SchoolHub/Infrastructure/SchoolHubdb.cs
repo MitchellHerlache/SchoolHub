@@ -12,6 +12,7 @@ using SchoolHub.Infrastructure.Containers;
 public class SchoolhubDb
 {
     private string connectionString = "server=127.0.0.1; user=team6 ;password=x359; database=team6; port=3306";
+    //private string connectionString = "server=127.0.0.1; user=SWTeam6 ;password=j359; database=SWTeam6; port=3306";
 
     #region Classes
     public List<Class> GetAllClasses()
