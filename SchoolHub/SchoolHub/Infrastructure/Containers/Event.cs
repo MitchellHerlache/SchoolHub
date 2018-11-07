@@ -8,6 +8,7 @@ namespace SchoolHub.Infrastructure.Containers
     public class Event
     {
         public int Id { get; set; }
+        public string ClassName { get; set; }
         public string Description { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
