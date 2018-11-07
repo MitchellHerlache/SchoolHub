@@ -16,15 +16,15 @@ namespace SchoolHub.Controllers
             return View();
         }
 
-        public string CheckUserLogin(string username, string password)
+        public JsonResult CheckUserLogin(string username, string password)
         {
             User user = this.db.GetUserByUsernamePassword(username, password);
             if(user == null)
             {
-                return "Incorrect username or password.";
+                return Json(new {message = "Incorrect username or password" });
             }
-            this.LoginUser(user);
-            return "";
+            return Json(new { message = "", user = user });
+
         }
 
         public ActionResult LoginUser(User user)
