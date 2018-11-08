@@ -11,7 +11,7 @@ namespace SchoolHub.Controllers
     public class LoginController : Controller
     {
         SchoolhubDb db = new SchoolhubDb();
-        public ActionResult Index()
+        public ActionResult LoginIndex()
         {
             return View();
         }
@@ -31,9 +31,9 @@ namespace SchoolHub.Controllers
         {
             if(user.RoleId == 1)
             {
-                return RedirectToAction("Index", "TeacherHome", new { user = user });
+                return RedirectToAction("TeacherHomeIndex", "TeacherHome", new { user = user });
             }
-            return RedirectToAction("Index", "StudentHome");
+            return RedirectToAction("StudentHomeIndex", "StudentHome");
         }
     }
 }

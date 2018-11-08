@@ -11,7 +11,7 @@ namespace SchoolHub.Controllers
     public class TeacherHomeController : Controller
     {
         // GET: TeacherHome
-        public ActionResult Index(string username)
+        public ActionResult TeacherHomeIndex(string username)
         {
             SchoolhubDb db = new SchoolhubDb();
             string usersname = username.Split(':')[0];

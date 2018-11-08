@@ -314,11 +314,11 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Register\Index.cshtml" />
+    <Content Include="Views\Register\RegisterIndex.cshtml" />
     <Content Include="Views\Login\Contact.cshtml" />
-    <Content Include="Views\Login\Index.cshtml" />
-    <Content Include="Views\StudentHome\Index.cshtml" />
-    <Content Include="Views\TeacherHome\Index.cshtml" />
+    <Content Include="Views\Login\LoginIndex.cshtml" />
+    <Content Include="Views\StudentHome\StudentHomeIndex.cshtml" />
+    <Content Include="Views\TeacherHome\TeacherHomeIndex.cshtml" />
     <Content Include="Views\TeacherHome\ChangePassword.cshtml" />
     <Content Include="Views\TeacherHome\AddClass.cshtml" />
   </ItemGroup>

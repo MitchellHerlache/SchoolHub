@@ -9,7 +9,7 @@ namespace SchoolHub.Controllers
 {
     public class StudentHomeController : Controller
     {
-        public ActionResult Index()
+        public ActionResult StudentHomeIndex()
         {
             StudentHomeModel thisModel = new StudentHomeModel();
             return View(thisModel);

@@ -9,7 +9,7 @@ namespace SchoolHub.Controllers
     public class RegisterController : Controller
     {
         // GET: Register
-        public ActionResult Index()
+        public ActionResult RegisterIndex()
         {
             return View();
         }
