@@ -11,12 +11,10 @@ namespace SchoolHub.Controllers
     public class TeacherHomeController : Controller
     {
         // GET: TeacherHome
-        public ActionResult TeacherHomeIndex(string username)
+        public ActionResult TeacherHomeIndex(int userId)
         {
             SchoolhubDb db = new SchoolhubDb();
-            string usersname = username.Split(':')[0];
-            string password = username.Split(':')[1];
-            User user = db.GetUserByUsernamePassword(usersname, password);
+            User user = db.GetUserByUserId(userId);
             TeacherHomeModel model = new TeacherHomeModel
             {
                 Classes = db.GetClassesByTeacherId(user.Id),

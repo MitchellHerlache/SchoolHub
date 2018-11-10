@@ -13,8 +13,8 @@ namespace SchoolHub.Infrastructure.Containers
         public string Description { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
-        public string StartDateString => StartDate.ToString();
-        public string EndDateString => EndDate.ToString();
+        public string StartDateString => StartDate.ToShortDateString();
+        public string EndDateString => EndDate.ToShortDateString();
         public int TeacherId { get; set; }
         public string TeacherName { get; set; }
         public int SchoolId { get; set; }

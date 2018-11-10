@@ -61,8 +61,8 @@
                         alert(out.message)
                     } else {
                         if (out.user.RoleId == 1) {
-                            var teacherId = out.user.Id;
-                            var url = '@Url.Action("TeacherHomeIndex", "TeacherHome")?username=' + $("#username").val() + ':' + $("#password").val();
+                            var teacherId = out.userId;
+                            var url = '@Url.Action("TeacherHomeIndex", "TeacherHome")?userId='+userId;
 
                         } else {
                             var url = '@Url.Action("StudentHomeIndex", "StudentHome")';
