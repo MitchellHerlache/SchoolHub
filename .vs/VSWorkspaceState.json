@@ -3,8 +3,12 @@
     "",
     "\\SchoolHub",
     "\\SchoolHub\\SchoolHub",
-    "\\SchoolHub\\SchoolHub\\Infrastructure\\Containers"
+    "\\SchoolHub\\SchoolHub\\Controllers",
+    "\\SchoolHub\\SchoolHub\\Infrastructure",
+    "\\SchoolHub\\SchoolHub\\Infrastructure\\Containers",
+    "\\SchoolHub\\SchoolHub\\Views",
+    "\\SchoolHub\\SchoolHub\\Views\\Login"
   ],
-  "SelectedNode": "\\SchoolHub\\SchoolHub\\SchoolHub.csproj",
+  "SelectedNode": "\\SchoolHub\\SchoolHub\\Infrastructure\\SchoolHubdb.cs",
   "PreviewInSolutionExplorer": false
 }
