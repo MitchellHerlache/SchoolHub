@@ -36,7 +36,12 @@ namespace SchoolHub.Controllers
             return View();
         }
 
-        public ActionResult ClassEvent()
+        public ActionResult EventHome()
+        {
+            return View();
+        }
+
+        public ActionResult AddEvent()
         {
             return View();
         }

@@ -1,6 +1,5 @@
 {
   "ExpandedNodes": [
-    "",
     "\\SchoolHub",
     "\\SchoolHub\\SchoolHub",
     "\\SchoolHub\\SchoolHub\\Controllers",
@@ -9,6 +8,5 @@
     "\\SchoolHub\\SchoolHub\\Views",
     "\\SchoolHub\\SchoolHub\\Views\\Login"
   ],
-  "SelectedNode": "\\SchoolHub\\SchoolHub\\Infrastructure\\SchoolHubdb.cs",
   "PreviewInSolutionExplorer": false
 }
