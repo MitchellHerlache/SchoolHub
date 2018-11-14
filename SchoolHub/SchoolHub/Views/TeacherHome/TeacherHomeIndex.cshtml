@@ -15,6 +15,22 @@
 
     <title>Teacher Home</title>
 
+    <!--Required for all of this code -->
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.13.0/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
+
+    <!--Needed for Column ReOrder functionality-->
+    <script src="https://cdn.datatables.net/colreorder/1.5.1/js/dataTables.colReorder.min.js"></script>
+
+    <!-- Needed for Responsive dataTable -->
+    <script src="https://cdn.datatables.net/responsive/2.2.1/js/dataTables.responsive.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.1/js/responsive.bootstrap4.min.js"></script>
+
+    <script src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js"></script>
+
     <!-- CSS needed for datatables-->
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap4.min.css">
@@ -72,38 +88,65 @@
             <tbody>
                 @for (int i = 0; i < Model.Classes.Count; i++)
                 {
-                <tr>
-                    <td>@Html.DisplayFor(Model => Model.Classes[i].Number)</td>
-                    <td>@Html.DisplayFor(Model => Model.Classes[i].Name)</td>
-                    <td>@Html.DisplayFor(Model => Model.Classes[i].Description)</td>
-                    <td>@Html.DisplayFor(Model => Model.Classes[i].StartDate)</td>
-                    <td>@Html.DisplayFor(Model => Model.Classes[i].EndDate)</td>
-                    <td>@Html.DisplayFor(Model => Model.Classes[i].TeacherName)</td>
-                    <td>@Html.DisplayFor(Model => Model.Classes[i].SchoolName)</td>
-                    <td>
-                        <form action="ClassEvent">
-                            <input type="hidden" value=Model.Classes[i].Number />
-                            <button type="submit" class="btn btn-secondary btn-sm" id="AddEvent">Add Event</button>
-                        </form>
-                    </td>
-                </tr>
+                    <tr>
+                        <td>@Html.DisplayFor(Model => Model.Classes[i].Number)</td>
+                        <td>@Html.DisplayFor(Model => Model.Classes[i].Name)</td>
+                        <td>@Html.DisplayFor(Model => Model.Classes[i].Description)</td>
+                        <td>@Html.DisplayFor(Model => Model.Classes[i].StartDate)</td>
+                        <td>@Html.DisplayFor(Model => Model.Classes[i].EndDate)</td>
+                        <td>@Html.DisplayFor(Model => Model.Classes[i].TeacherName)</td>
+                        <td>@Html.DisplayFor(Model => Model.Classes[i].SchoolName)</td>
+                        <td>
+                            <form action="EventHome">
+                                <input type="hidden" id="key" value=@Html.DisplayFor(Model => Model.Classes[i].Number) />
+                                <script>
+                                    var keyValue = document.getElementById("key").value;
+                                    console.log(keyValue);
+                                </script>
+                                <button type="submit" class="btn btn-secondary btn-sm" id="AddEvent">Add Event</button>
+                            </form>
+                        </td>
+                    </tr>
                 }
             </tbody>
         </table>
 
-        <!-- Used to make the datatable responsive -->
-        <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-        <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-        <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
-
-        <!--Needed for Column ReOrder functionality-->
-        <script src="https://cdn.datatables.net/colreorder/1.5.1/js/dataTables.colReorder.min.js"></script>
-
-        <!-- Needed for Responsive dataTable -->
-        <script src="https://cdn.datatables.net/responsive/2.2.1/js/dataTables.responsive.min.js"></script>
-        <script src="https://cdn.datatables.net/responsive/2.2.1/js/responsive.bootstrap4.min.js"></script>
-
         <script src="~/Scripts/SchoolHubScripts/DatatableModal.js"></script>
+
+        <script>
+            $(document).ready(function () {
+                $("#submit").click(function (e) {
+                    if ($("#key").val() == "")
+                        alert("Failed to retrieve class events");
+                    else {
+                        $.ajax({
+                            type: "POST",
+                            contentType: "application/json; charset=utf-8",
+                            data: {"key": + $("#key").val() },
+                            dataType: "html",
+                            success: function (result, status, xhr) {
+                                out = JSON.parse(result)
+                                if (out.message != "") {
+                                    alert(out.message)
+                                } else {
+                                    if (out.user.RoleId == 1) {
+                                        var teacherId = out.user.Id;
+                                        var url = '@Url.Action("TeacherHomeIndex", "TeacherHome")?userId='+teacherId;
+                                    } 
+                                    window.location.href = url;
+                                }
+                            },
+                            error: function (xhr, status, error) {
+                                alert("Issue occured while retrieving events")
+                            }
+                        });
+                    }
+                    return false;
+                });
+            });
+
+        </script>
+
     </div>
     <!-- End jumbotron -->
 </body>
