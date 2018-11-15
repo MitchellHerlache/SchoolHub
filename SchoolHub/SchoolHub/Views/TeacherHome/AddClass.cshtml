@@ -63,12 +63,17 @@
 
                     <div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
                         <label for="ClassNumber">Select list:</label>
-                        <select id="ClassNumber"class="form-control">
+                        <select id="ClassNumber" class="form-control">
                             <option value="CS300" selected>CS300</option>
                             <option value="CS321">CS321</option>
                             <option value="CS346">CS346</option>
                             <option value="CS480">CS480</option>
                         </select>
+                    </div>
+
+                    <div class="form-group col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                        <label for="ClassNumber">Class Number:</label>
+                        <input class="form-control" type="text" name="ClassNumber" id="ClassNumber" placeholder="Artificial Intelligence" required>
                     </div>
 
                     <div class="form-group col-lg-6 col-md-6 col-sm-12 col-xs-12">
@@ -123,10 +128,10 @@
                     classNumber: $("#ClassNumber").val(),
                     className: $("#ClassName").val(),
                     classDescription: $("#ClassDescription").val(),
-                    startDate: $("StartDate").val(),
-                    endDate: $("EndDate").val(),
+                    startDate: $("#StartDate").val(),
+                    endDate: $("#EndDate").val(),
                     teacherId: teacherid,
-                    schoolId: $("SchoolId").val()
+                    schoolId: $("#SchoolId").val()
                 }
                 $.ajax({
                     type: "POST",
