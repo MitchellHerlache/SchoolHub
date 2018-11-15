@@ -19,8 +19,13 @@ namespace SchoolHub.Controllers
         {   
             SchoolhubDb db = new SchoolhubDb();
             User user = inUser;
-            user.Id = int.Parse(db.AddUser(inUser, password));
-            return Json(new { message = "", user = user });
+            string result = db.AddUser(inUser, password);
+            if(int.TryParse(result, out int x))
+            {
+                user.Id = int.Parse(result);
+                return Json(new { message = "", user = user });
+            }
+            return Json(new { message = result, user = user });
         }
 
         //public ActionResult RegisterUser(User user, string password)

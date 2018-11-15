@@ -64,6 +64,8 @@
         </div>
     </div>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
     <script>
         $(document).ready(function () {
             $("#test").click(function (e) {
@@ -71,10 +73,11 @@
                     username: $("#Username").val(),
                     email: $("#Email").val(),
                     firstName: $("#FirstName").val(),
-                    lastName: $("LastName").val(),
-                    roleId: $("RoleId").val()
+                    lastName: $("#LastName").val(),
+                    roleId: $("#RoleId").val()
                 }
-                if ($("#Password").val().length >= 8)
+                //if ($("#Password").val().length >= 8)
+                if (1 == 0)
                     alert("Password must be more 8 characters or more.");
                 else {
                     $.ajax({
@@ -88,7 +91,7 @@
                             if (out.message != "") {
                                 alert(out.message)
                             } else {
-                                if (user.roleId == 1) {
+                                if (out.user.RoleId == 1) {
                                     var teacherId = out.user.Id;
                                     var url = '@Url.Action("TeacherHomeIndex", "TeacherHome")?userId=' + teacherId;
                                 } else {
