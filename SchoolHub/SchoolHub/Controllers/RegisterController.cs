@@ -13,5 +13,7 @@ namespace SchoolHub.Controllers
         {
             return View();
         }
+
+        
     }
 }
