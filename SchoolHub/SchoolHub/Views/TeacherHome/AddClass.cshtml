@@ -9,6 +9,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <title>Add Teacher Class</title>
+    @* Needed for cookies to work *@
+    <script src="~/Scripts/SchoolHubScripts/Cookie.js"></script>
 </head>
 <body>
     <div class="jumbotron">
@@ -16,11 +18,38 @@
             <div class="col-md-6">
                 <h2>Add Class</h2>
             </div>
-            <div class="col-md-6">
-                <div class="vertical-menu">
-                    <a href="TeacherHomeIndex" class="btn btn-primary">Go back</a>
+            <form>
+                <div class="col-md-6">
+                    <div class="vertical-menu">
+                        <button type="submit" id="GoBack" class="btn btn-primary">Go back</button>
+                    </div>
                 </div>
-            </div>
+                @*<script>
+                        $(document).ready(function () {
+                            $("#submit").click(function (e) {
+                                $.ajax({
+                                    type: "POST",
+                                    contentType: "application/json; charset=utf-8",
+                                    dataType: "html",
+                                    success: function (result, status, xhr) {
+                                        out = JSON.parse(result)
+                                        if (out.message != "") {
+                                            alert(out.message)
+                                        } else {
+                                            var UserId = getCookie("userId");
+                                            var url = '@Url.Action("TeacherHomeIndex", "TeacherHomeController")?userId=' + UserId;
+                                        }
+                                    },
+                                    error: function (xhr, status, error) {
+                                        alert("Issue occured while returning home")
+                                    }
+                                });
+                            return false;
+                            });
+                        });
+                    </script>*@
+            </form>
+
         </div>
         <div class="container">
             <form>
@@ -37,10 +66,10 @@
 
                     <div class="form-group col-lg-8 col-md-8 col-sm-8 col-xs-12">
                         <label for="CourseName">Course Name:</label>
-                        <input class="form-control" type="text" name="CourseName" id="CourseName" value="Artificial Intelligence">
+                        <input class="form-control" type="text" name="CourseName" id="CourseName" placeholder="Artificial Intelligence">
                     </div>
                 </div>
-                
+
                 <div class="form-group">
                     <label for="Description">Last Name:</label>
                     <textarea class="form-control col-lg-12 col-md-12" rows="4" name="Description" id="Description" readonly>The pursuit of making computer act rationally
@@ -57,7 +86,7 @@
                         <input class="form-control col-lg-12 col-md-12" type="date" name="EndDate" id="EndDate" placeholder="11/07/2018">
                     </div>
                 </div>
-                
+
 
                 <div class="form-group">
                     <button class="btn btn-lg btn-primary btn-block" type="submit" id="Submit">Add Class</button>
@@ -72,13 +101,50 @@
     <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
 
     <script>
-$(function() {
-   if (!Modernizr.inputtypes['date']) {
-      $('input[type=date]').datepicker({
-         dateFormat: 'mm-dd-yy'
-      });
-   }
-});
+        $(function () {
+            if (!Modernizr.inputtypes['date']) {
+                $('input[type=date]').datepicker({
+                    dateFormat: 'mm-dd-yy'
+                });
+            }
+        });
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $("#Submit").click(function (e) {
+                var user = {
+                    username: $("#Username").val(),
+                    email: $("#Email").val(),
+                    firstName: $("#FirstName").val(),
+                    lastName: $("LastName").val(),
+                    roleId: $("RoleId").val()
+                }
+                else {
+                    $.ajax({
+                        type: "POST",
+                        contentType: "application/json; charset=utf-8",
+                        data: JSON.stringify({'user': user, 'password': $("#Password").val() }),
+                        dataType: "json",
+                        success: function (result, status, xhr) {
+                            out = JSON.parse(result)
+                            if (out.message != "") {
+                                alert(out.message)
+                            } 
+                            else {
+                                var url = '@Url.Action("StudentHomeIndex", "StudentHome")';
+                                window.location.href = url;
+                            }
+                        },
+                        error: function (xhr, status, error) {
+                            alert("Issue occured while registering")
+                        }
+                    });
+                }
+                return false;
+            });
+        });
+
     </script>
 
 </body>

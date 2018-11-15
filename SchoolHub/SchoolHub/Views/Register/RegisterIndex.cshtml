@@ -50,7 +50,7 @@
 
                 <div class="form-group">
                     <label for="Password">Password:</label>
-                    <input class="form-control col-lg-12 col-md-12" type="password" name="Password" id="Password" placeholder="Enter your password" required>
+                    <input class="form-control col-lg-12 col-md-12" type="password" name="Password" id="Password" placeholder="Enter your password" minlength="8" required>
                 </div>
 
                 <div class="form-group">
@@ -64,18 +64,6 @@
         </div>
     </div>
 
-    @* Create a json object of user that takes the following parameters 
-        var user = {
-            etc.
-        }
-        
-        javascript equivalent of int.tryParse
-
-        The register user will return a new userId if it is successful
-
-        Else it will return a string
-        *@
-
     <script>
         $(document).ready(function () {
             $("#Submit").click(function (e) {
@@ -88,35 +76,35 @@
                 }
                 if ($("#Password").val().length >= 8)
                     alert("Password must be more 8 characters or more.");
-        else {
-            $.ajax({
-                type: "POST",
-                contentType: "application/json; charset=utf-8",
-                data: JSON.stringify({'user': user, 'password': $("#Password").val() }),
-                dataType: "json",
-                success: function (result, status, xhr) {
-                    out = JSON.parse(result)
-                    if (out.message != "") {
-                        alert(out.message)
-                    } @*else if (user.roleId == 1) {
-                        //var url = '@Url.Action("RegisterIndex", "RegisterIndex")';
-                       // var teacherId = out.user.Id;
-                        var url = '@Url.Action("TeacherHomeIndex", "TeacherHome")?userId='+teacherId;
-                        window.location.href = url;
-                    }*@ 
-                    else {
-                        var url = '@Url.Action("StudentHomeIndex", "StudentHome")';
-                        window.location.href = url;
-                    }
-                },
-                error: function (xhr, status, error) {
-                    alert("Issue occured while registering")
+                else {
+                    $.ajax({
+                        type: "POST",
+                        contentType: "application/json; charset=utf-8",
+                        data: JSON.stringify({'user': user, 'password': $("#Password").val() }),
+                        dataType: "json",
+                        success: function (result, status, xhr) {
+                            out = JSON.parse(result)
+                            if (out.message != "") {
+                                alert(out.message)
+                            } @*else if (user.roleId == 1) {
+                                //var url = '@Url.Action("RegisterIndex", "RegisterIndex")';
+                               // var teacherId = out.user.Id;
+                                var url = '@Url.Action("TeacherHomeIndex", "TeacherHome")?userId='+teacherId;
+                                window.location.href = url;
+                            }*@ 
+                            else {
+                                var url = '@Url.Action("StudentHomeIndex", "StudentHome")';
+                                window.location.href = url;
+                            }
+                        },
+                        error: function (xhr, status, error) {
+                            alert("Issue occured while registering")
+                        }
+                    });
                 }
+                return false;
             });
-        }
-        return false;
-    });
-});
+        });
 
     </script>
 </body>

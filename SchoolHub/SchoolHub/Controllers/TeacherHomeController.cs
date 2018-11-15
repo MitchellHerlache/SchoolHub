@@ -37,9 +37,17 @@ namespace SchoolHub.Controllers
             return View();
         }
 
-        public ActionResult EventHome()
+        public ActionResult EventHome(int userId, int inClassId)
         {
-            return View();
+            SchoolhubDb db = new SchoolhubDb();
+            User user = db.GetUserByUserId(userId);
+            TeacherHomeModel model = new TeacherHomeModel
+            {
+                Events = db.GetEventsByClassId(inClassId),
+                Schools = new List<SelectItem>(),
+                User = user
+            };
+            return View(model);
         }
 
         public ActionResult AddEvent()

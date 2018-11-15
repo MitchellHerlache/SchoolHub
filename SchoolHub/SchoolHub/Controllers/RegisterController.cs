@@ -11,11 +11,6 @@ namespace SchoolHub.Controllers
     public class RegisterController : Controller
     {
         // GET: Register
-        //public ActionResult RegisterIndex()
-        //{
-        //    return View();
-        //}
-
         public ActionResult RegisterIndex(User user, string password)
         {
             if (user.Email != null || password != null)
@@ -41,21 +36,5 @@ namespace SchoolHub.Controllers
             }    
             return View();
         }
-
-        //public ActionResult TeacherHomeIndex(int userId)
-        //{
-        //    SchoolhubDb db = new SchoolhubDb();
-        //    User user = db.GetUserByUserId(userId);
-        //    TeacherHomeModel model = new TeacherHomeModel
-        //    {
-        //        Classes = db.GetClassesByTeacherId(user.Id),
-        //        Events = new List<Event>(),
-        //        Schools = new List<SelectItem>(),
-        //        User = user
-        //    };
-        //    return View(model);
-        //}
-
-
     }
 }

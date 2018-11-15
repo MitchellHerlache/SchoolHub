@@ -36,6 +36,7 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.1/css/responsive.bootstrap4.min.css">
 
+    <script src="~/Scripts/SchoolHubScripts/Cookie.js"></script>
 </head>
 
 <body>
@@ -69,6 +70,10 @@
     </nav>
 
     <div class="jumbotron">
+        <script>
+            var UserId = getCookie("userId");
+            console.log(UserId)
+        </script>
         <table id="example" class="table table-striped table-bordered" style="width:100%">
             <!-- Goes at the top of the page. This should always be consitant with the footer -->
             <thead>
@@ -102,6 +107,35 @@
                                 <script>
                                     var keyValue = document.getElementById("key").value;
                                     console.log(keyValue);
+
+                                    $(document).ready(function () {
+                                        $("#submit").click(function (e) {
+                                            if ($("#key").val() == "")
+                                                alert("Failed to retrieve class events");
+                                            else {
+                                                $.ajax({
+                                                    type: "POST",
+                                                    contentType: "application/json; charset=utf-8",
+                                                    data: { "key": + $("#key").val() },
+                                                    dataType: "html",
+                                                    success: function (result, status, xhr) {
+                                                        out = JSON.parse(result)
+                                                        if (out.message != "") {
+                                                            alert(out.message)
+                                                        } else {
+                                                            var url = '@Url.Action("EventHome", "TeacherHomeController")';
+                                                            //var url = '@Url.Action("EventHome", "TeacherHomeController")';
+                                                        }
+                                                    },
+                                                    error: function (xhr, status, error) {
+                                                        alert("Issue occured while retrieving events")
+                                                    }
+                                                });
+                                            }
+                                            return false;
+                                        });
+                                    });
+                               
                                 </script>
                                 <button type="submit" class="btn btn-secondary btn-sm" id="AddEvent">Add Event</button>
                             </form>
@@ -113,39 +147,7 @@
 
         <script src="~/Scripts/SchoolHubScripts/DatatableModal.js"></script>
 
-        <script>
-            $(document).ready(function () {
-                $("#submit").click(function (e) {
-                    if ($("#key").val() == "")
-                        alert("Failed to retrieve class events");
-                    else {
-                        $.ajax({
-                            type: "POST",
-                            contentType: "application/json; charset=utf-8",
-                            data: {"key": + $("#key").val() },
-                            dataType: "html",
-                            success: function (result, status, xhr) {
-                                out = JSON.parse(result)
-                                if (out.message != "") {
-                                    alert(out.message)
-                                } else {
-                                    if (out.user.RoleId == 1) {
-                                        var teacherId = out.user.Id;
-                                        var url = '@Url.Action("TeacherHomeIndex", "TeacherHome")?userId='+teacherId;
-                                    } 
-                                    window.location.href = url;
-                                }
-                            },
-                            error: function (xhr, status, error) {
-                                alert("Issue occured while retrieving events")
-                            }
-                        });
-                    }
-                    return false;
-                });
-            });
-
-        </script>
+       
 
     </div>
     <!-- End jumbotron -->
