@@ -1,7 +1,7 @@
 ﻿@{
     ViewBag.Title = "School Hub Add Class";
 }
-
+@model SchoolHub.Models.TeacherHomeModel
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,6 +24,7 @@
                         <button type="submit" id="GoBack" class="btn btn-primary">Go back</button>
                     </div>
                 </div>
+
                 @*<script>
                         $(document).ready(function () {
                             $("#submit").click(function (e) {
@@ -63,7 +64,7 @@
 
                     <div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
                         <label for="ClassNumber">Select list:</label>
-                        <select id="ClassNumber"class="form-control">
+                        <select id="ClassNumber" class="form-control">
                             <option value="CS300" selected>CS300</option>
                             <option value="CS321">CS321</option>
                             <option value="CS346">CS346</option>
@@ -123,10 +124,10 @@
                     classNumber: $("#ClassNumber").val(),
                     className: $("#ClassName").val(),
                     classDescription: $("#ClassDescription").val(),
-                    startDate: $("StartDate").val(),
-                    endDate: $("EndDate").val(),
+                    startDate: $("#StartDate").val(),
+                    endDate: $("#EndDate").val(),
                     teacherId: teacherid,
-                    schoolId: $("SchoolId").val()
+                    schoolId: $("#SchoolId").val()
                 }
                 $.ajax({
                     type: "POST",
@@ -134,12 +135,12 @@
                     data: JSON.stringify({ 'class': newClass }),
                     dataType: "json",
                     success: function (result, status, xhr) {
-                        out = JSON.parse(result)
+                        out = result;
                         if (out.message != "") {
                             alert(out.message)
-                        } 
+                        }
                         else {
-                            var url = '@Url.Action("StudentHomeIndex", "StudentHome")';
+                            var url = '@Url.Action("TeacherHomeIndex", "TeacherHome", new {userId = Model.User.Id })';
                             window.location.href = url;
                         }
                     },

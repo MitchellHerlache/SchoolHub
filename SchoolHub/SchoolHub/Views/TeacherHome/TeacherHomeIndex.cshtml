@@ -52,7 +52,7 @@
                     <a class="nav-link" href="#">Calendar</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="AddClass">Add Class</a>
+                    @Html.ActionLink("TeacherHome", "AddClass", new { userId = Model.User.Id})
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">View Student List</a>
