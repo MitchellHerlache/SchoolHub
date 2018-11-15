@@ -171,6 +171,7 @@
     <Compile Include="Infrastructure\Containers\SelectItem.cs" />
     <Compile Include="Infrastructure\Containers\User.cs" />
     <Compile Include="Infrastructure\SchoolHubdb.cs" />
+    <Compile Include="Models\RegisterHomeModel.cs" />
     <Compile Include="Models\StudentHomeModel.cs" />
     <Compile Include="Models\TeacherHomeModel.cs" />
     <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />

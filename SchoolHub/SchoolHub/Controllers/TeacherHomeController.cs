@@ -11,6 +11,7 @@ namespace SchoolHub.Controllers
     public class TeacherHomeController : Controller
     {
         // GET: TeacherHome
+        // View(model) returns a user with an id, username, etc. 
         public ActionResult TeacherHomeIndex(int userId)
         {
             SchoolhubDb db = new SchoolhubDb();
