@@ -26,15 +26,20 @@ namespace SchoolHub.Controllers
             return View(model);
         }
 
+
         public ActionResult ChangePassword()
         {
             return View();
         }
 
 
-        public ActionResult AddClass()
+        public ActionResult AddClass(int userId)
         {
-            return View();
+            TeacherHomeModel model = new TeacherHomeModel();
+            User user = new User();
+            user.Id = userId;
+            model.User = user;
+            return View(model);
         }
 
         public ActionResult EventHome(int inClassId)
