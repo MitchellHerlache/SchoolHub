@@ -63,7 +63,7 @@
                     <a class="nav-link" href="ChangePassword">Change Password</a>
                 </li>
                 <li class="nav-item ">
-                    <a class="nav-link" href="#">Sign Out</a>
+                    <a class="nav-link" href="../Login/LoginIndex">Sign Out</a>
                 </li>
             </ul>
         </div>
@@ -93,61 +93,58 @@
             <tbody>
                 @for (int i = 0; i < Model.Classes.Count; i++)
                 {
-                    <tr>
-                        <td>@Html.DisplayFor(Model => Model.Classes[i].Number)</td>
-                        <td>@Html.DisplayFor(Model => Model.Classes[i].Name)</td>
-                        <td>@Html.DisplayFor(Model => Model.Classes[i].Description)</td>
-                        <td>@Html.DisplayFor(Model => Model.Classes[i].StartDate)</td>
-                        <td>@Html.DisplayFor(Model => Model.Classes[i].EndDate)</td>
-                        <td>@Html.DisplayFor(Model => Model.Classes[i].TeacherName)</td>
-                        <td>@Html.DisplayFor(Model => Model.Classes[i].SchoolName)</td>
-                        <td>
-                            <form action="EventHome">
-                                <input type="hidden" id="key" value=@Html.DisplayFor(Model => Model.Classes[i].Number) />
-                                <script>
-                                    var keyValue = document.getElementById("key").value;
-                                    console.log(keyValue);
-
-                                    $(document).ready(function () {
-                                        $("#submit").click(function (e) {
-                                            if ($("#key").val() == "")
-                                                alert("Failed to retrieve class events");
-                                            else {
-                                                $.ajax({
-                                                    type: "POST",
-                                                    contentType: "application/json; charset=utf-8",
-                                                    data: { "key": + $("#key").val() },
-                                                    dataType: "html",
-                                                    success: function (result, status, xhr) {
-                                                        out = JSON.parse(result)
-                                                        if (out.message != "") {
-                                                            alert(out.message)
-                                                        } else {
-                                                            var url = '@Url.Action("EventHome", "TeacherHomeController")';
-                                                            //var url = '@Url.Action("EventHome", "TeacherHomeController")';
-                                                        }
-                                                    },
-                                                    error: function (xhr, status, error) {
-                                                        alert("Issue occured while retrieving events")
-                                                    }
-                                                });
-                                            }
-                                            return false;
-                                        });
-                                    });
-                               
-                                </script>
-                                <button type="submit" class="btn btn-secondary btn-sm" id="AddEvent">Add Event</button>
-                            </form>
-                        </td>
-                    </tr>
+                <tr>
+                    <td>@Html.DisplayFor(Model => Model.Classes[i].Number)</td>
+                    <td>@Html.DisplayFor(Model => Model.Classes[i].Name)</td>
+                    <td>@Html.DisplayFor(Model => Model.Classes[i].Description)</td>
+                    <td>@Html.DisplayFor(Model => Model.Classes[i].StartDate)</td>
+                    <td>@Html.DisplayFor(Model => Model.Classes[i].EndDate)</td>
+                    <td>@Html.DisplayFor(Model => Model.Classes[i].TeacherName)</td>
+                    <td>@Html.DisplayFor(Model => Model.Classes[i].SchoolName)</td>
+                    <td>
+                        @*<form action="EventHome">*@
+                            <input type="hidden" id="key" value=@Html.DisplayFor(Model => Model.Classes[i].Id) />
+                            <button type="submit" class="btn btn-secondary btn-sm" id="submit" name="submit" >Add Event</button>
+                            
+                        @*</form>*@
+                    </td>
+                </tr>
                 }
             </tbody>
         </table>
 
         <script src="~/Scripts/SchoolHubScripts/DatatableModal.js"></script>
 
-       
+        <script>
+            $(document).ready(function () {
+                $("#submit").click(function (e) {
+                    if ($("#key").val() == "")
+                        alert("Failed to retrieve class events");
+                    else {
+                        $.ajax({
+                            type: "POST",
+                            contentType: "application/json; charset=utf-8",
+                            data: { "key": + $("#key").val() },
+                            dataType: "html",
+                            success: function (result, status, xhr) {
+                                out = JSON.parse(result)
+                                if (out.message != "") {
+                                    alert(out.message)
+                                } else {
+                                    var url = '@Url.Action("EventHome", "TeacherHome")?inClassId=' + $("#key").val();
+                                    window.location.href = url;
+                                }
+                            },
+                            error: function (xhr, status, error) {
+                                alert("Issue occured while retrieving events" + error)
+                            }
+                        });
+                    }
+                    return false;
+                });
+            });
+            
+        </script>
 
     </div>
     <!-- End jumbotron -->

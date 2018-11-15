@@ -54,39 +54,44 @@
         <div class="container">
             <form>
                 <div class="row">
-                    <div class="form-group col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                        <label for="CourseNumber">Select list:</label>
-                        <select class="form-control">
-                            <option value="3" selected>CS300</option>
-                            <option value="4">CS321</option>
-                            <option value="5">CS346</option>
-                            <option value="6">CS480</option>
+                    <div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                        <label for="SchoolId">Select School:</label>
+                        <select id="SchoolId" class="form-control">
+                            <option value="1" selected>UW Oshkosh</option>
                         </select>
                     </div>
 
-                    <div class="form-group col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                    <div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                        <label for="ClassNumber">Select list:</label>
+                        <select id="ClassNumber"class="form-control">
+                            <option value="CS300" selected>CS300</option>
+                            <option value="CS321">CS321</option>
+                            <option value="CS346">CS346</option>
+                            <option value="CS480">CS480</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group col-lg-6 col-md-6 col-sm-12 col-xs-12">
                         <label for="CourseName">Course Name:</label>
-                        <input class="form-control" type="text" name="CourseName" id="CourseName" placeholder="Artificial Intelligence">
+                        <input class="form-control" type="text" name="CourseName" id="CourseName" placeholder="Artificial Intelligence" required>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label for="Description">Last Name:</label>
-                    <textarea class="form-control col-lg-12 col-md-12" rows="4" name="Description" id="Description" readonly>The pursuit of making computer act rationally
-                </textarea>
+                    <label for="ClassDescription">Class Description:</label>
+                    <textarea class="form-control col-lg-12 col-md-12" rows="4" name="ClassDescription" id="ClassDescription" placeholder="Description goes here" required></textarea>
                 </div>
                 <div class="row">
                     <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
                         <label for="StartDate">Start Date:</label>
-                        <input class="form-control col-lg-12 col-md-12" type="date" name="StartDate" id="StartDate" placeholder="11/07/2018">
+                        <input class="form-control col-lg-12 col-md-12" type="date" name="StartDate" id="StartDate" placeholder="11/07/2018" required>
                     </div>
 
                     <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
                         <label for="EndDate">Start Date:</label>
-                        <input class="form-control col-lg-12 col-md-12" type="date" name="EndDate" id="EndDate" placeholder="11/07/2018">
+                        <input class="form-control col-lg-12 col-md-12" type="date" name="EndDate" id="EndDate" placeholder="11/07/2018" required>
                     </div>
                 </div>
-
 
                 <div class="form-group">
                     <button class="btn btn-lg btn-primary btn-block" type="submit" id="Submit">Add Class</button>
@@ -112,35 +117,36 @@
 
     <script>
         $(document).ready(function () {
-            $("#Submit").click(function (e) {
-                var user = {
-                    username: $("#Username").val(),
-                    email: $("#Email").val(),
-                    firstName: $("#FirstName").val(),
-                    lastName: $("LastName").val(),
-                    roleId: $("RoleId").val()
+            $("#submit").click(function (e) {
+                var teacherid = getCookie("userId");
+                var newClass = {
+                    classNumber: $("#ClassNumber").val(),
+                    className: $("#ClassName").val(),
+                    classDescription: $("#ClassDescription").val(),
+                    startDate: $("StartDate").val(),
+                    endDate: $("EndDate").val(),
+                    teacherId: teacherid,
+                    schoolId: $("SchoolId").val()
                 }
-                else {
-                    $.ajax({
-                        type: "POST",
-                        contentType: "application/json; charset=utf-8",
-                        data: JSON.stringify({'user': user, 'password': $("#Password").val() }),
-                        dataType: "json",
-                        success: function (result, status, xhr) {
-                            out = JSON.parse(result)
-                            if (out.message != "") {
-                                alert(out.message)
-                            } 
-                            else {
-                                var url = '@Url.Action("StudentHomeIndex", "StudentHome")';
-                                window.location.href = url;
-                            }
-                        },
-                        error: function (xhr, status, error) {
-                            alert("Issue occured while registering")
+                $.ajax({
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify({ 'class': newClass }),
+                    dataType: "json",
+                    success: function (result, status, xhr) {
+                        out = JSON.parse(result)
+                        if (out.message != "") {
+                            alert(out.message)
+                        } 
+                        else {
+                            var url = '@Url.Action("StudentHomeIndex", "StudentHome")';
+                            window.location.href = url;
                         }
-                    });
-                }
+                    },
+                    error: function (xhr, status, error) {
+                        alert("Issue occured while registering")
+                    }
+                });
                 return false;
             });
         });

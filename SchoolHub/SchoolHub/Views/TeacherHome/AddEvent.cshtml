@@ -8,6 +8,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.0/jquery-ui.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
+    <!--  Needed for cookies to work -->
+    <script src="~/Scripts/SchoolHubScripts/Cookie.js"></script>
     <title>Add Teacher Class</title>
 </head>
 <body>
@@ -25,9 +31,8 @@
         <div class="container">
             <form>
                 <div class="form-group">
-                    <label for="Description">Event Description:</label>
-                    <textarea class="form-control col-lg-12 col-md-12" rows="4" name="Description" id="Description" placeholder="Description goes here">
-                </textarea>
+                    <label for="EventDescription">Event Description:</label>
+                    <textarea class="form-control col-lg-12 col-md-12" rows="4" name="EventDescription" id="EventDescription" placeholder="Description goes here"></textarea>
                 </div>
                 <div class="row">
                     <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
@@ -40,7 +45,7 @@
                         <input class="form-control col-lg-12 col-md-12" type="date" name="EndDate" id="EndDate" placeholder="11/07/2018">
                     </div>
                 </div>
-                
+
                 <div class="form-group">
                     <button class="btn btn-lg btn-primary btn-block" type="submit" id="Submit">Add Event</button>
                 </div>
@@ -48,19 +53,52 @@
         </div>
     </div>
 
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.0/jquery-ui.min.css" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
+    <script>
+        $(function () {
+            if (!Modernizr.inputtypes['date']) {
+                $('input[type=date]').datepicker({
+                    dateFormat: 'mm-dd-yy'
+                });
+            }
+        });
+    </script>
 
     <script>
-        $(function() {
-           if (!Modernizr.inputtypes['date']) {
-              $('input[type=date]').datepicker({
-                 dateFormat: 'mm-dd-yy'
-              });
-           }
+        $(document).ready(function () {
+            $("#submit").click(function (e) {
+                var teacherid = getCookie("userId");
+                var newClass = {
+                    classNumber: $("#ClassNumber").val(),
+                    className: $("#ClassName").val(),
+                    classDescription: $("#EventDescription").val(),
+                    startDate: $("StartDate").val(),
+                    endDate: $("EndDate").val(),
+                    teacherId: teacherid,
+                    schoolId: $("SchoolId").val()
+                }
+                $.ajax({
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify({ 'class': newClass }),
+                    dataType: "json",
+                    success: function (result, status, xhr) {
+                        out = JSON.parse(result)
+                        if (out.message != "") {
+                            alert(out.message)
+                        }
+                        else {
+                            var url = '@Url.Action("StudentHomeIndex", "StudentHome")';
+                            window.location.href = url;
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        alert("Issue occured while registering")
+                    }
+                });
+                return false;
+            });
         });
+
     </script>
 
 </body>

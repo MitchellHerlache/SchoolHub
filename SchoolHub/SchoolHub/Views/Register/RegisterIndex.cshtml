@@ -54,7 +54,7 @@
                 </div>
 
                 <div class="form-group">
-                    <button class="btn btn-secondary btn-block" type="submit" id="Submit">Register</button>
+                    <button class="btn btn-secondary btn-block" type="submit" id="test">Register</button>
                 </div>
             </form>
 
@@ -66,7 +66,7 @@
 
     <script>
         $(document).ready(function () {
-            $("#Submit").click(function (e) {
+            $("#test").click(function (e) {
                 var user = {
                     username: $("#Username").val(),
                     email: $("#Email").val(),
@@ -79,22 +79,22 @@
                 else {
                     $.ajax({
                         type: "POST",
+                        url: "/Register/RegisterUser",
                         contentType: "application/json; charset=utf-8",
-                        data: JSON.stringify({'user': user, 'password': $("#Password").val() }),
+                        data: JSON.stringify({'inUser': user, 'password': $("#Password").val() }),
                         dataType: "json",
                         success: function (result, status, xhr) {
                             out = JSON.parse(result)
                             if (out.message != "") {
                                 alert(out.message)
-                            } @*else if (user.roleId == 1) {
-                                //var url = '@Url.Action("RegisterIndex", "RegisterIndex")';
-                               // var teacherId = out.user.Id;
-                                var url = '@Url.Action("TeacherHomeIndex", "TeacherHome")?userId='+teacherId;
-                                window.location.href = url;
-                            }*@ 
-                            else {
-                                var url = '@Url.Action("StudentHomeIndex", "StudentHome")';
-                                window.location.href = url;
+                            } else {
+                                if (user.roleId == 1) {
+                                    var teacherId = out.user.Id;
+                                    var url = '@Url.Action("TeacherHomeIndex", "TeacherHome")?userId=' + teacherId;
+                                } else {
+                                    var url = '@Url.Action("StudentHomeIndex", "StudentHome")';
+                                }
+                                 window.location.href = url;
                             }
                         },
                         error: function (xhr, status, error) {

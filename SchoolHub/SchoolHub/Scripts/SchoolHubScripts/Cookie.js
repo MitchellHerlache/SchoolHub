@@ -20,15 +20,3 @@ function getCookie(cname) {
     }
     return "";
 }
-
-function checkCookie() {
-    var user = getCookie("userId");
-    if (user != "") {
-        alert("Welcome again " + user);
-    } else {
-        user = prompt("Please enter your name:", "");
-        if (user != "" && user != null) {
-            setCookie("userId", user, 30);
-        }
-    }
-}
