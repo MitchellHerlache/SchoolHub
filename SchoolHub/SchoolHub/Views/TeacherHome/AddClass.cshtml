@@ -24,31 +24,6 @@
                         <button type="submit" id="GoBack" class="btn btn-primary">Go back</button>
                     </div>
                 </div>
-
-                @*<script>
-                        $(document).ready(function () {
-                            $("#submit").click(function (e) {
-                                $.ajax({
-                                    type: "POST",
-                                    contentType: "application/json; charset=utf-8",
-                                    dataType: "html",
-                                    success: function (result, status, xhr) {
-                                        out = JSON.parse(result)
-                                        if (out.message != "") {
-                                            alert(out.message)
-                                        } else {
-                                            var UserId = getCookie("userId");
-                                            var url = '@Url.Action("TeacherHomeIndex", "TeacherHomeController")?userId=' + UserId;
-                                        }
-                                    },
-                                    error: function (xhr, status, error) {
-                                        alert("Issue occured while returning home")
-                                    }
-                                });
-                            return false;
-                            });
-                        });
-                    </script>*@
             </form>
 
         </div>
@@ -59,16 +34,6 @@
                         <label for="SchoolId">Select School:</label>
                         <select id="SchoolId" class="form-control">
                             <option value="1" selected>UW Oshkosh</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                        <label for="ClassNumber">Select list:</label>
-                        <select id="ClassNumber" class="form-control">
-                            <option value="CS300" selected>CS300</option>
-                            <option value="CS321">CS321</option>
-                            <option value="CS346">CS346</option>
-                            <option value="CS480">CS480</option>
                         </select>
                     </div>
 
@@ -135,9 +100,10 @@
                     schoolId: $("#SchoolId").val()
                 }
                 $.ajax({
+                    url: "/TeacherHome/AddClass",
                     type: "POST",
                     contentType: "application/json; charset=utf-8",
-                    data: JSON.stringify({ 'class': newClass }),
+                    data: JSON.stringify({ 'inClass': newClass }),
                     dataType: "json",
                     success: function (result, status, xhr) {
                         out = result;

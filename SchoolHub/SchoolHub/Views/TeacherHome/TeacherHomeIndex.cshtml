@@ -105,7 +105,6 @@
                         @*<form action="EventHome">*@
                             <input type="hidden" id="key" value=@Html.DisplayFor(Model => Model.Classes[i].Id) />
                             <button type="submit" class="btn btn-secondary btn-sm" id="submit" name="submit" >Add Event</button>
-                            
                         @*</form>*@
                     </td>
                 </tr>
@@ -118,29 +117,11 @@
         <script>
             $(document).ready(function () {
                 $("#submit").click(function (e) {
-                    if ($("#key").val() == "")
-                        alert("Failed to retrieve class events");
-                    else {
-                        $.ajax({
-                            type: "POST",
-                            contentType: "application/json; charset=utf-8",
-                            data: { "key": + $("#key").val() },
-                            dataType: "html",
-                            success: function (result, status, xhr) {
-                                out = JSON.parse(result)
-                                if (out.message != "") {
-                                    alert(out.message)
-                                } else {
-                                    var url = '@Url.Action("EventHome", "TeacherHome")?inClassId=' + $("#key").val();
-                                    window.location.href = url;
-                                }
-                            },
-                            error: function (xhr, status, error) {
-                                alert("Issue occured while retrieving events" + error)
-                            }
-                        });
-                    }
-                    return false;
+                    var key = $("#key").val();
+                    var userId = @Model.User.Id
+                    var url = '@Url.Action("EventHome", "TeacherHome")?inClassId=' + $("#key").val() + "&userId=" + userId;
+                    window.location.href = url;
+  
                 });
             });
             
