@@ -13,7 +13,7 @@ namespace SchoolHub.Models
         public List<Class> Classes { get; set; }
         public List<Event> Events { get; set; }
 
-        public StudentHomeModel()
+       /*public StudentHomeModel()
         {
             Classes = new List<Class>();
             Events = new List<Event>();
@@ -110,6 +110,6 @@ namespace SchoolHub.Models
             tempEvent.Type = "Assignment";
 
             Events.Add(tempEvent);
-        }
+        }*/
     }
 }
