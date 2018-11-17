@@ -11,11 +11,11 @@ namespace SchoolHub.Infrastructure.Containers
         public string ClassName { get; set; }
         public string Description { get; set; }
         public DateTime StartDate { get; set; }
-        public DateTime EndDate { get; set; }
+        public DateTime? EndDate { get; set; }
         public string StartDateString => StartDate.ToShortDateString();
-        public string EndDateString => EndDate == null ? null : EndDate.ToShortDateString();
-        public int ClassId { get; set; }
-        public int UserId { get; set; }
+        public string EndDateString => EndDate == null ? null : EndDate.Value.ToShortDateString();
+        public int? ClassId { get; set; }
+        public int? UserId { get; set; }
         public int TypeId { get; set; }
         public string Type { get; set; }
     }

@@ -292,25 +292,240 @@ public class SchoolhubDb
     #endregion
 
     #region Events
+    public List<SelectItem> GetAllEventTypes()
+    {
+        string query = "SELECT `Id`, `Name` FROM `Type`";
+        MySqlConnection conn = null;
+        MySqlCommand command = null;
+        MySqlDataReader reader = null;
+        try
+        {
+            conn = new MySqlConnection(connectionString);
+            conn.Open();
+            command = new MySqlCommand(query, conn);
+            reader = command.ExecuteReader();
+            List<SelectItem> eventTypes = new List<SelectItem>();
+            while (reader.Read())
+            {
+                SelectItem newType = new SelectItem();
+                newType.Value = Convert.ToInt32(reader.GetValue(0));
+                newType.Label = reader.GetValue(1).ToString();
+                eventTypes.Add(newType);
+            }
+            return eventTypes;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
+        finally
+        {
+            // We must assure the connection gets closed, even in the event of an exception.
+            if (conn != null && conn.State != ConnectionState.Closed)
+            {
+                conn.Close();
+            }
+        }
+        return null;
+    }
 
+    //Inserts new student event.  For events with no end date, assign DateTime.MinValue to EndDate.
     public bool AddStudentEvent(Event newEvent)
     {
+        string query = "INSERT INTO `Event`(`Description`, `StartDate`, `EndDate`, `ClassId`, `UserId`, `TypeId`) VALUES (@description,@startDate,@endDate,@classId,@userId,@typeId)";
+        MySqlConnection conn = null;
+        MySqlCommand command = null;
+        MySqlDataReader reader = null;
+        try
+        {
+            conn = new MySqlConnection(connectionString);
+            conn.Open();
+            command = new MySqlCommand(query, conn);
+            command.Parameters.AddWithValue("@description", newEvent.Description);
+            command.Parameters.AddWithValue("@startDate", newEvent.StartDate.ToString("yyyy-MM-dd"));
+            command.Parameters.AddWithValue("@endDate", newEvent.EndDate.Equals(DateTime.MinValue) ? null : newEvent.EndDate.Value.ToString("yyyy-MM-dd"));
+            command.Parameters.AddWithValue("@classId", null);
+            command.Parameters.AddWithValue("@userId", newEvent.UserId);
+            command.Parameters.AddWithValue("@typeId", newEvent.TypeId);
+            command.ExecuteNonQuery();
+            return true;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
+        finally
+        {
+            // We must assure the connection gets closed, even in the event of an exception.
+            if (conn != null && conn.State != ConnectionState.Closed)
+            {
+                conn.Close();
+            }
+        }
         return false;
     }
 
+    //Inserts new class event.  For events with no end date, assign DateTime.MinValue to EndDate.
     public bool AddClassEvent(Event newEvent)
     {
+        string query = "INSERT INTO `Event`(`Description`, `StartDate`, `EndDate`, `ClassId`, `UserId`, `TypeId`) VALUES (@description,@startDate,@endDate,@classId,@userId,@typeId)";
+        MySqlConnection conn = null;
+        MySqlCommand command = null;
+        MySqlDataReader reader = null;
+        try
+        {
+            conn = new MySqlConnection(connectionString);
+            conn.Open();
+            command = new MySqlCommand(query, conn);
+            command.Parameters.AddWithValue("@description", newEvent.Description);
+            command.Parameters.AddWithValue("@startDate", newEvent.StartDate.ToString("yyyy-MM-dd"));
+            command.Parameters.AddWithValue("@endDate", newEvent.EndDate.Equals(DateTime.MinValue) ? null : newEvent.EndDate.Value.ToString("yyyy-MM-dd"));
+            command.Parameters.AddWithValue("@classId", newEvent.ClassId);
+            command.Parameters.AddWithValue("@userId", null);
+            command.Parameters.AddWithValue("@typeId", newEvent.TypeId);
+            command.ExecuteNonQuery();
+            return true;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
+        finally
+        {
+            // We must assure the connection gets closed, even in the event of an exception.
+            if (conn != null && conn.State != ConnectionState.Closed)
+            {
+                conn.Close();
+            }
+        }
         return false;
     }
 
     public List<Event> GetEventsByStudentId(int studentId)
     {
-        return new List<Event>();
+        string query = "SELECT `Id`, `Description`, `StartDate`, `EndDate`, `ClassId`, `UserId`, `TypeId` FROM `Event` LEFT JOIN `Enrollment` ON `Enrollment`.`ClassId` = `Event`.`ClassId` WHERE `Enrollment`.`StudentId` = @studentId OR `Event`.`UserId` = @studentId";
+        MySqlConnection conn = null;
+        MySqlCommand command = null;
+        MySqlDataReader reader = null;
+        try
+        {
+            conn = new MySqlConnection(connectionString);
+            conn.Open();
+            command = new MySqlCommand(query, conn);
+            command.Parameters.AddWithValue("@studentId", studentId);
+            reader = command.ExecuteReader();
+            List<Event> events = new List<Event>();
+            while (reader.Read())
+            {
+                Event newEvent = new Event();
+                newEvent.Id = Convert.ToInt32(reader.GetValue(0));
+                newEvent.Description = reader.GetValue(1).ToString();
+                newEvent.StartDate = reader.GetDateTime(2);
+                if(reader.GetValue(3).Equals(null))
+                {
+                    newEvent.EndDate = null;
+                } else
+                {
+                    newEvent.EndDate = reader.GetDateTime(2);
+                }
+                if(reader.GetValue(4).Equals(null))
+                {
+                    newEvent.ClassId = null;
+                } else
+                {
+                    newEvent.ClassId = Convert.ToInt32(reader.GetValue(4));
+                }
+                if (reader.GetValue(5).Equals(null))
+                {
+                    newEvent.UserId = null;
+                }
+                else
+                {
+                    newEvent.UserId = Convert.ToInt32(reader.GetValue(5));
+                }
+                newEvent.TypeId = Convert.ToInt32(reader.GetValue(6));
+                events.Add(newEvent);
+            }
+            return events;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
+        finally
+        {
+            // We must assure the connection gets closed, even in the event of an exception.
+            if (conn != null && conn.State != ConnectionState.Closed)
+            {
+                conn.Close();
+            }
+        }
+        return null;
     }
 
     public List<Event> GetEventsByClassId(int classId)
     {
-        return new List<Event>();
+        string query = "SELECT `Id`, `Description`, `StartDate`, `EndDate`, `ClassId`, `UserId`, `TypeId` FROM `Event` WHERE `Event`.`ClassId` = @classId";
+        MySqlConnection conn = null;
+        MySqlCommand command = null;
+        MySqlDataReader reader = null;
+        try
+        {
+            conn = new MySqlConnection(connectionString);
+            conn.Open();
+            command = new MySqlCommand(query, conn);
+            command.Parameters.AddWithValue("@classId", classId);
+            reader = command.ExecuteReader();
+            List<Event> events = new List<Event>();
+            while (reader.Read())
+            {
+                Event newEvent = new Event();
+                newEvent.Id = Convert.ToInt32(reader.GetValue(0));
+                newEvent.Description = reader.GetValue(1).ToString();
+                newEvent.StartDate = reader.GetDateTime(2);
+                if (reader.GetValue(3).Equals(null))
+                {
+                    newEvent.EndDate = null;
+                }
+                else
+                {
+                    newEvent.EndDate = reader.GetDateTime(2);
+                }
+                if (reader.GetValue(4).Equals(null))
+                {
+                    newEvent.ClassId = null;
+                }
+                else
+                {
+                    newEvent.ClassId = Convert.ToInt32(reader.GetValue(4));
+                }
+                if (reader.GetValue(5).Equals(null))
+                {
+                    newEvent.UserId = null;
+                }
+                else
+                {
+                    newEvent.UserId = Convert.ToInt32(reader.GetValue(5));
+                }
+                newEvent.TypeId = Convert.ToInt32(reader.GetValue(6));
+                newEvent.TypeId = Convert.ToInt32(reader.GetValue(6));
+                events.Add(newEvent);
+            }
+            return events;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
+        finally
+        {
+            // We must assure the connection gets closed, even in the event of an exception.
+            if (conn != null && conn.State != ConnectionState.Closed)
+            {
+                conn.Close();
+            }
+        }
+        return null;
     }
 
     #endregion
