@@ -6,8 +6,11 @@
     "\\SchoolHub\\SchoolHub\\Controllers",
     "\\SchoolHub\\SchoolHub\\Infrastructure",
     "\\SchoolHub\\SchoolHub\\Infrastructure\\Containers",
+    "\\SchoolHub\\SchoolHub\\Models",
     "\\SchoolHub\\SchoolHub\\Views",
-    "\\SchoolHub\\SchoolHub\\Views\\Login"
+    "\\SchoolHub\\SchoolHub\\Views\\StudentHome",
+    "\\SchoolHub\\SchoolHub\\Views\\TeacherHome"
   ],
+  "SelectedNode": "\\SchoolHub\\SchoolHub\\Views\\StudentHome",
   "PreviewInSolutionExplorer": false
 }
