@@ -20,7 +20,7 @@
         </ul>
         <ul class="navbar-nav">
             <li class="nav-item ">
-                <a class="nav-link" href="signOut.html">Sign Out</a>
+                <a class="nav-link" href="../Login/LoginIndex">Sign Out</a>
             </li>
         </ul>
     </div>
@@ -66,11 +66,11 @@
         @for (int i = 0; i < Model.Events.Count; i++)
         {
             string startDateDisplay = $"{Model.Events[i].StartDate.Month}/{Model.Events[i].StartDate.Day}/{Model.Events[i].StartDate.Year}";
-            string endDateDisplay = $"{Model.Events[i].EndDate.Month}/{Model.Events[i].EndDate.Day}/{Model.Events[i].EndDate.Year}";
+            
             <tr>
                 <td>@Html.DisplayFor(Model => Model.Events[i].Description)</td>
                 <td>@startDateDisplay</td>
-                <td>@endDateDisplay</td>
+                <td>@Html.DisplayFor(Model => Model.Events[i].EndDate)</td>
                 <td>@Html.DisplayFor(Model => Model.Events[i].ClassId)</td>
                 <td>@Html.DisplayFor(Model => Model.Events[i].Type)</td>
                 <td>

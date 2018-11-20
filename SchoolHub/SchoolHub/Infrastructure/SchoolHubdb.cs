@@ -403,7 +403,7 @@ public class SchoolhubDb
 
     public List<Event> GetEventsByStudentId(int studentId)
     {
-        string query = "SELECT `Id`, `Description`, `StartDate`, `EndDate`, `ClassId`, `UserId`, `TypeId` FROM `Event` LEFT JOIN `Enrollment` ON `Enrollment`.`ClassId` = `Event`.`ClassId` WHERE `Enrollment`.`StudentId` = @studentId OR `Event`.`UserId` = @studentId";
+        string query = "SELECT `Event`.`Id`, `Description`, `StartDate`, `EndDate`, `Event`.`ClassId`, `UserId`, `TypeId` FROM `Event` LEFT JOIN `Enrollment` ON `Enrollment`.`ClassId` = `Event`.`ClassId` WHERE `Enrollment`.`StudentId` = @studentId OR `Event`.`UserId` = @studentId";
         MySqlConnection conn = null;
         MySqlCommand command = null;
         MySqlDataReader reader = null;

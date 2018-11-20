@@ -26,15 +26,17 @@ namespace SchoolHub.Controllers
             return View(thisModel);
         }
 
-        public ActionResult Classes()
+        public ActionResult Classes(int userId)
         {
             SchoolhubDb db = new SchoolhubDb();
 
             ClassHomeModel model = new ClassHomeModel()
             {
-                Classes = db.GetClassesByStudentId(user.Id),
+                Classes = db.GetClassesByStudentId(userId),
                 Schools = db.GetAllSchools()
             };
+
+            return View(model);
         }
         
         public bool DropClass(int userId, int classId)
