@@ -13,7 +13,7 @@ namespace SchoolHub.Models
         public List<Class> Classes { get; set; }
         public List<Event> Events { get; set; }
         public List<SelectItem> EventTypes { get; set; }
-       /*public StudentHomeModel()
+       public StudentHomeModel()
         {
             Classes = new List<Class>();
             Events = new List<Event>();
@@ -69,6 +69,7 @@ namespace SchoolHub.Models
             tempEvent.StartDate = new DateTime(2018, 10, 27);
             tempEvent.EndDate = new DateTime(2018, 11, 7);
             tempEvent.ClassId = 1;
+            tempEvent.ClassName = "CS 341";
             tempEvent.UserId = 0;
             tempEvent.TypeId = 2;
             tempEvent.Type = "Project";
@@ -81,6 +82,7 @@ namespace SchoolHub.Models
             tempEvent.StartDate = new DateTime(2018, 11, 8);
             tempEvent.EndDate = new DateTime(2018, 11, 8);
             tempEvent.ClassId = 2;
+            tempEvent.ClassName = "CS 300";
             tempEvent.UserId = 0;
             tempEvent.TypeId = 1;
             tempEvent.Type = "Exam";
@@ -94,6 +96,7 @@ namespace SchoolHub.Models
             tempEvent.EndDate = new DateTime(2018, 11, 9);
             tempEvent.ClassId = 0;
             tempEvent.UserId = 0;
+            tempEvent.ClassName = "Physics 101";
             tempEvent.TypeId = 0;
             tempEvent.Type = "Assignment";
 
@@ -105,11 +108,12 @@ namespace SchoolHub.Models
             tempEvent.StartDate = new DateTime(2018, 11, 5);
             tempEvent.EndDate = new DateTime(2018, 11, 12);
             tempEvent.ClassId = 0;
+            tempEvent.ClassName = "Physics 101";
             tempEvent.UserId = 0;
             tempEvent.TypeId = 0;
             tempEvent.Type = "Assignment";
 
             Events.Add(tempEvent);
-        }*/
+        }
     }
 }

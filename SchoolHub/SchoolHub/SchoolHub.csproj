@@ -303,6 +303,7 @@
     <Content Include="Scripts\SchoolHubScripts\Cookie.js" />
     <Content Include="Scripts\SchoolHubScripts\DatatableModal.js" />
     <Content Include="Scripts\SchoolHubScripts\Login.js" />
+    <Content Include="Scripts\SchoolHubScripts\StudentHomeTable.js" />
     <Content Include="v4.5\MySql.Data.dll" />
     <Content Include="v4.5\MySql.Data.Entity.EF5.dll" />
     <Content Include="v4.5\MySql.Data.Entity.EF6.dll" />

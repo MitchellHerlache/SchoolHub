@@ -15,13 +15,16 @@ namespace SchoolHub.Controllers
         {
             SchoolhubDb db = new SchoolhubDb();
             User user = db.GetUserByUserId(userId);
-
+            /*
             StudentHomeModel thisModel = new StudentHomeModel()
             {
                 User = user,
                 Events = db.GetEventsByStudentId(user.Id),
                 Classes = db.GetClassesByStudentId(user.Id)
-            };
+            };*/
+
+            // being used to test the filter, switch back to other after.
+            StudentHomeModel thisModel = new StudentHomeModel();
 
             return View(thisModel);
         }
