@@ -99,9 +99,10 @@
                     <td>@Html.DisplayFor(Model => Model.Classes[i].TeacherName)</td>
                     <td>@Html.DisplayFor(Model => Model.Classes[i].SchoolName)</td>
                     <td>
+                        @Html.ActionLink("Add Event", "AddEvent", new { id = Model.Classes[i].Id})
                         @*<form action="EventHome">*@
-                            <input type="hidden" id="key" value=@Html.DisplayFor(Model => Model.Classes[i].Id) />
-                            <button type="submit" class="btn btn-secondary btn-sm" id="submit" name="submit" >Add Event</button>
+                            @*<input type="hidden" id="key" value=@Html.DisplayFor(Model => Model.Classes[i].Id) />
+                            <button type="submit" class="btn btn-secondary btn-sm" id="submit" name="submit" >Add Event</b*@utton>
                         @*</form>*@
                     </td>
                 </tr>

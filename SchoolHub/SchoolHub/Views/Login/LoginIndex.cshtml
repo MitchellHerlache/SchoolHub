@@ -65,7 +65,6 @@
                         if (out.user.RoleId == 1) {
                             var teacherId = out.user.Id;
                             setCookie("userId", teacherId, 2);
-
                             var url = '@Url.Action("TeacherHomeIndex", "TeacherHome")?userId='+teacherId;
 
                         } else {

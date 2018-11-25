@@ -42,6 +42,19 @@ namespace SchoolHub.Controllers
             return View(model);
         }
 
+        public JsonResult AddNewClass(Class inClass)
+        {
+           SchoolhubDb db = new SchoolhubDb();
+           bool result = db.AddClass(inClass);
+           if (result == true)
+           {
+              return Json(new { message = ""});
+         } else
+         {
+              return Json(new { message = result});
+         }
+        }
+
         public ActionResult ChangePassword(int userId)
         {
             TeacherHomeModel model = new TeacherHomeModel();
@@ -63,28 +76,6 @@ namespace SchoolHub.Controllers
             }
             return Json(new { message = result, user = user });
         }
-
-        //public JsonResult CreateNewClass(Class inClass)
-        //{
-        //    //SchoolhubDb db = new SchoolhubDb();
-        //    //bool result = db.AddClass(inClass);
-        //    //if (result == true)
-        //    //{
-        //    //    return Json(new { message = "", user = user });
-        //    //} else
-        //    //{
-        //    //    return Json(new { message = result, user = user });
-        //    //}
-
-        //    //User user = inUser;
-        //    //string result = db.AddUser(inUser, password);
-        //    //if (int.TryParse(result, out int x))
-        //    //{
-        //    //    user.Id = int.Parse(result);
-        //    //    return Json(new { message = "", user = user });
-        //    //}
-        //    //return Json(new { message = result, user = user });
-        //}
 
         public ActionResult EventHome(int inClassId, int userId)
         {

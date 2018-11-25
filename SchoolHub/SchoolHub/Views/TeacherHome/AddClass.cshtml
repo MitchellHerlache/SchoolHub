@@ -18,14 +18,9 @@
             <div class="col-md-6">
                 <h2>Add Class</h2>
             </div>
-            <form>
-                <div class="col-md-6">
-                    <div class="vertical-menu">
-                        @Html.ActionLink("Go Back", "TeacherHomeIndex", new { userId = Model.User.Id }, new { @class = "btn btn-primary " })
-                    </div>
-                </div>
-            </form>
-
+            <div class="col-md-6">
+                @Html.ActionLink("Go Back", "TeacherHomeIndex", new { userId = Model.User.Id }, new { @class = "btn btn-primary " })
+            </div>
         </div>
         <div class="container">
             <form>
@@ -43,8 +38,8 @@
                     </div>
 
                     <div class="form-group col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                        <label for="CourseName">Course Name:</label>
-                        <input class="form-control" type="text" name="CourseName" id="CourseName" placeholder="Artificial Intelligence" required>
+                        <label for="ClassName">Course Name:</label>
+                        <input class="form-control" type="text" name="ClassName" id="ClassName" placeholder="Artificial Intelligence" required>
                     </div>
                 </div>
 
@@ -73,8 +68,10 @@
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.0/jquery-ui.min.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+    @*<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>*@
     <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 
     <script>
         $(function () {
@@ -88,7 +85,7 @@
 
     <script>
         $(document).ready(function () {
-            $("#submit").click(function (e) {
+            $("#Submit").click(function (e) {
                 var teacherid = getCookie("userId");
                 var newClass = {
                     classNumber: $("#ClassNumber").val(),
@@ -100,8 +97,8 @@
                     schoolId: $("#SchoolId").val()
                 }
                 $.ajax({
-                    url: "/TeacherHome/AddClass",
                     type: "POST",
+                    url: "/TeacherHome/AddNewClass",
                     contentType: "application/json; charset=utf-8",
                     data: JSON.stringify({ 'inClass': newClass }),
                     dataType: "json",
@@ -116,7 +113,7 @@
                         }
                     },
                     error: function (xhr, status, error) {
-                        alert("Issue occured while registering")
+                        alert("Issue occured while adding a class")
                     }
                 });
                 return false;
