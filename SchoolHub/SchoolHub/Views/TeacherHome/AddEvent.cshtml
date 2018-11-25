@@ -63,36 +63,39 @@
         });
     </script>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
     <script>
         $(document).ready(function () {
-            $("#submit").click(function (e) {
+            $("#Submit").click(function (e) {
                 var teacherid = getCookie("userId");
                 var newClass = {
                     classNumber: $("#ClassNumber").val(),
                     className: $("#ClassName").val(),
-                    classDescription: $("#EventDescription").val(),
-                    startDate: $("StartDate").val(),
-                    endDate: $("EndDate").val(),
+                    classDescription: $("#ClassDescription").val(),
+                    startDate: $("#StartDate").val(),
+                    endDate: $("#EndDate").val(),
                     teacherId: teacherid,
-                    schoolId: $("SchoolId").val()
+                    schoolId: $("#SchoolId").val()
                 }
                 $.ajax({
                     type: "POST",
+                    url: "/TeacherHome/AddNewEvent",
                     contentType: "application/json; charset=utf-8",
-                    data: JSON.stringify({ 'class': newClass }),
+                    data: JSON.stringify({ 'inClass': newClass }),
                     dataType: "json",
                     success: function (result, status, xhr) {
-                        out = JSON.parse(result)
+                        out = result;
                         if (out.message != "") {
                             alert(out.message)
                         }
                         else {
-                            var url = '@Url.Action("StudentHomeIndex", "StudentHome")';
+                            var url = '@Url.Action("TeacherHomeIndex", "TeacherHome", new {userId = Model.User.Id })';
                             window.location.href = url;
                         }
                     },
                     error: function (xhr, status, error) {
-                        alert("Issue occured while registering")
+                        alert("Issue occured while adding a class")
                     }
                 });
                 return false;
