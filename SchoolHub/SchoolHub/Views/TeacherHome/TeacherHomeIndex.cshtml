@@ -99,7 +99,7 @@
                     <td>@Html.DisplayFor(Model => Model.Classes[i].TeacherName)</td>
                     <td>@Html.DisplayFor(Model => Model.Classes[i].SchoolName)</td>
                     <td>
-                        @Html.ActionLink("Add Event", "AddEvent", new { id = Model.Classes[i].Id}, new { @class = "btn btn-secondary " })
+                        @Html.ActionLink("View Events", "EventHome", "EventHome", new { ClassId = Model.Classes[i].Id}, new { @class = "btn btn-secondary " })
                     </td>
                 </tr>
                 }
@@ -107,20 +107,6 @@
         </table>
 
         <script src="~/Scripts/SchoolHubScripts/DatatableModal.js"></script>
-
-        <script>
-            $(document).ready(function () {
-                $("#submit").click(function (e) {
-                    var key = $("#key").val();
-                    var userId = @Model.User.Id
-                    var url = '@Url.Action("EventHome", "TeacherHome")?inClassId=' + $("#key").val() + "&userId=" + userId;
-                    window.location.href = url;
-  
-                });
-            });
-            
-        </script>
-
     </div>
     <!-- End jumbotron -->
 </body>

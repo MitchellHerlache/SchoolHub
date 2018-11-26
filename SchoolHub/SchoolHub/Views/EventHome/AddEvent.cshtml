@@ -1,4 +1,6 @@
-﻿@{
+﻿@model SchoolHub.Models.EventHomeModel
+
+@{
     ViewBag.Title = "School Hub Add Event";
 }
 
@@ -23,27 +25,42 @@
                 <h2>Add Event</h2>
             </div>
             <div class="col-md-6">
-                <div class="vertical-menu">
-                    <a href="EventHome" class="btn btn-secondary">Go back</a>
-                </div>
+                @Html.ActionLink("Go Back", "EventHome", new { ClassId = 1 }, new { @class = "btn btn-primary " })
             </div>
         </div>
         <div class="container">
             <form>
-                <div class="form-group">
-                    <label for="EventDescription">Event Description:</label>
-                    <textarea class="form-control col-lg-12 col-md-12" rows="4" name="EventDescription" id="EventDescription" placeholder="Description goes here"></textarea>
-                </div>
                 <div class="row">
-                    <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                    <div class="form-group col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                        <label for="Type">Select Event Type:</label>
+                        <select id="Type" class="form-control">
+                            @for (int i = 0; i < Model.EventTypes.Count; i++)
+                            {
+                                //<option value="Model.EventTypes[i].id">
+                             //   @Html.DisplayFor(Model => Model.EventTypes[i].Name) 
+                              //  </option>
+                            }
+                            <option value="1" selected>Homework</option>
+                            <option value="2">Assignment</option>
+                            <option value="3">Lab</option>
+                            <option value="4">Exam</option>
+                            <option value="5">Participation Activity</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-lg-4 col-md-4 col-sm-4 col-xs-12">
                         <label for="StartDate">Start Date:</label>
                         <input class="form-control col-lg-12 col-md-12" type="date" name="StartDate" id="StartDate" placeholder="11/07/2018">
                     </div>
 
-                    <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                    <div class="form-group col-lg-4 col-md-4 col-sm-4 col-xs-12">
                         <label for="EndDate">Start Date:</label>
                         <input class="form-control col-lg-12 col-md-12" type="date" name="EndDate" id="EndDate" placeholder="11/07/2018">
                     </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="EventDescription">Event Description:</label>
+                    <textarea class="form-control col-lg-12 col-md-12" rows="3" name="EventDescription" id="EventDescription" placeholder="Description goes here"></textarea>
                 </div>
 
                 <div class="form-group">
@@ -66,7 +83,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 
     <script>
-        $(document).ready(function () {
+        @*$(document).ready(function () {
             $("#Submit").click(function (e) {
                 var teacherid = getCookie("userId");
                 var newClass = {
@@ -100,7 +117,7 @@
                 });
                 return false;
             });
-        });
+        });*@
 
     </script>
 

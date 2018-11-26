@@ -162,6 +162,7 @@
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\RegisterController.cs" />
     <Compile Include="Controllers\StudentHomeController.cs" />
+    <Compile Include="Controllers\EventHomeController.cs" />
     <Compile Include="Controllers\TeacherHomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -174,6 +175,7 @@
     <Compile Include="Models\RegisterHomeModel.cs" />
     <Compile Include="Models\StudentHomeModel.cs" />
     <Compile Include="Models\ClassHomeModel.cs" />
+    <Compile Include="Models\EventHomeModel.cs" />
     <Compile Include="Models\TeacherHomeModel.cs" />
     <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
     <Compile Include="obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
@@ -326,8 +328,8 @@
     <Content Include="Views\TeacherHome\TeacherHomeIndex.cshtml" />
     <Content Include="Views\TeacherHome\ChangePassword.cshtml" />
     <Content Include="Views\TeacherHome\AddClass.cshtml" />
-    <Content Include="Views\TeacherHome\EventHome.cshtml" />
-    <Content Include="Views\TeacherHome\AddEvent.cshtml" />
+    <Content Include="Views\EventHome\EventHome.cshtml" />
+    <Content Include="Views\EventHome\AddEvent.cshtml" />
     <Content Include="Views\TeacherHome\SignOut.cshtml" />
   </ItemGroup>
   <ItemGroup>

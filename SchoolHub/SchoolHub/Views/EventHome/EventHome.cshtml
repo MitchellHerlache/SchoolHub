@@ -1,4 +1,4 @@
-﻿@model SchoolHub.Models.TeacherHomeModel
+﻿@model SchoolHub.Models.EventHomeModel
 
 @{
     ViewBag.Title = "Class Event Home";
@@ -41,46 +41,32 @@
 <body>
     <div class="jumbotron">
         <a class="btn btn-secondary" href="AddEvent">Add Event</a>
-        <a class="btn btn-secondary" href="TeacherHomeIndex">Go Back</a>
+        @* @Html.ActionLink("Add Event", "AddEvent", new { ClassId = Model.Class.Id }, new { @class = "nav-link  " })*@
+        @Html.ActionLink("Add Event", "AddEvent", null, new { @class = "nav-link  " })
+        @Html.ActionLink("Go back", "TeacherHome", "TeacherHomeIndex", null, new { @class = "btn btn-secondary " })
+       @* @Html.ActionLink("Go back", "TeacherHome", "TeacherHomeIndex", new { userId = Model.User.Id }, new { @class = "btn btn-secondary " })*@
         <table id="example" class="table table-striped table-bordered" style="width:100%">
             <!-- Goes at the top of the page. This should always be consitant with the footer -->
             <thead>
                 <tr>
-                    <th>Class Identifier</th>
-                    <th>Class Name</th>
-                    <th>Class Description</th>
+                    <th>Event Type</th>
+                    <th>Event Description</th>
                     <th>Start Date</th>
                     <th>End Date</th>
-                    <th>Teacher Name</th>
-                    <th>School Name</th>
-                    <th>Add Class Event</th>
                 </tr>
             </thead>
 
             <!-- Content will be dynamically entered in here -->
             <tbody>
-                <tr>
-                    <td>Basically Empty</td>
-                    <td>But not fully empty</td>
-                    <td>Basically Empty</td>
-                    <td>But not fully empty</td>
-                    <td>Basically Empty</td>
-                    <td>But not fully empty</td>
-                    <td>Basically Empty</td>
-                    <td>But not fully empty</td>
-                </tr>
-                @*@for (int i = 0; i < Model.Classes.Count; i++)
-                    {
-                        <tr>
-                            <td>@Html.DisplayFor(Model => Model.Classes[i].Number)</td>
-                            <td>@Html.DisplayFor(Model => Model.Classes[i].Name)</td>
-                            <td>@Html.DisplayFor(Model => Model.Classes[i].Description)</td>
-                            <td>@Html.DisplayFor(Model => Model.Classes[i].StartDate)</td>
-                            <td>@Html.DisplayFor(Model => Model.Classes[i].EndDate)</td>
-                            <td>@Html.DisplayFor(Model => Model.Classes[i].TeacherName)</td>
-                            <td>@Html.DisplayFor(Model => Model.Classes[i].SchoolName)</td>
-                        </tr>
-                    }*@
+                @for (int i = 0; i < Model.Events.Count; i++)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(Model => Model.Events[i].Type)</td>
+                        <td>@Html.DisplayFor(Model => Model.Events[i].Description)</td>
+                        <td>@Html.DisplayFor(Model => Model.Events[i].StartDate)</td>
+                        <td>@Html.DisplayFor(Model => Model.Events[i].EndDate)</td>
+                    </tr>
+                }
             </tbody>
         </table>
 

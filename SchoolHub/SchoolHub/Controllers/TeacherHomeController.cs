@@ -26,13 +26,6 @@ namespace SchoolHub.Controllers
             return View(model);
         }
 
-
-        public ActionResult ChangePassword()
-        {
-            return View();
-        }
-
-
         public ActionResult AddClass(int userId)
         {
             TeacherHomeModel model = new TeacherHomeModel();
@@ -75,26 +68,6 @@ namespace SchoolHub.Controllers
                 return Json(new { message = "", user = user });
             }
             return Json(new { message = result, user = user });
-        }
-
-        public ActionResult EventHome(int inClassId, int userId)
-        {
-
-            //SchoolhubDb db = new SchoolhubDb();
-            //User user = db.GetUserByUserId(userId);
-            //TeacherHomeModel model = new TeacherHomeModel
-            //{
-            //    Events = db.GetEventsByClassId(inClassId),
-            //    Schools = new List<SelectItem>(),
-            //    User = user
-            //};
-            //return View(model);
-            return View();
-        }
-
-        public ActionResult AddEvent()
-        {
-            return View();
         }
     }
 }
