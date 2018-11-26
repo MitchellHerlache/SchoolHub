@@ -561,3 +561,16 @@ C:\Users\John\UW Oshkosh CS\SchoolHub\SchoolHub\SchoolHub\obj\Debug\SchoolHub.cs
 C:\Users\John\UW Oshkosh CS\SchoolHub\SchoolHub\SchoolHub\obj\Debug\SchoolHub.dll
 C:\Users\John\UW Oshkosh CS\SchoolHub\SchoolHub\SchoolHub\obj\Debug\SchoolHub.pdb
 C:\Users\John\UW Oshkosh CS\SchoolHub\SchoolHub\SchoolHub\obj\Debug\SchoolHub.csprojAssemblyReference.cache
+C:\Users\gaugej48\Desktop\Project\SchoolHub\SchoolHub\bin\ApplicationInsights.config
+C:\Users\gaugej48\Desktop\Project\SchoolHub\SchoolHub\bin\SchoolHub.dll.config
+C:\Users\gaugej48\Desktop\Project\SchoolHub\SchoolHub\bin\SchoolHub.dll
+C:\Users\gaugej48\Desktop\Project\SchoolHub\SchoolHub\bin\SchoolHub.pdb
+C:\Users\gaugej48\Desktop\Project\SchoolHub\SchoolHub\bin\MySql.Data.dll
+C:\Users\gaugej48\Desktop\Project\SchoolHub\SchoolHub\bin\MySql.Data.Entity.EF5.dll
+C:\Users\gaugej48\Desktop\Project\SchoolHub\SchoolHub\bin\MySql.Data.Entity.EF6.dll
+C:\Users\gaugej48\Desktop\Project\SchoolHub\SchoolHub\bin\MySql.Web.dll
+C:\Users\gaugej48\Desktop\Project\SchoolHub\SchoolHub\obj\Debug\SchoolHub.csprojAssemblyReference.cache
+C:\Users\gaugej48\Desktop\Project\SchoolHub\SchoolHub\obj\Debug\SchoolHub.csproj.CoreCompileInputs.cache
+C:\Users\gaugej48\Desktop\Project\SchoolHub\SchoolHub\obj\Debug\SchoolHub.csproj.CopyComplete
+C:\Users\gaugej48\Desktop\Project\SchoolHub\SchoolHub\obj\Debug\SchoolHub.dll
+C:\Users\gaugej48\Desktop\Project\SchoolHub\SchoolHub\obj\Debug\SchoolHub.pdb

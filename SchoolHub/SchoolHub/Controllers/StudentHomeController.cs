@@ -24,7 +24,10 @@ namespace SchoolHub.Controllers
             };*/
 
             // being used to test the filter, switch back to other after.
-            StudentHomeModel thisModel = new StudentHomeModel();
+            StudentHomeModel thisModel = new StudentHomeModel()
+            {
+                User = user
+            };
 
             return View(thisModel);
         }
@@ -41,7 +44,62 @@ namespace SchoolHub.Controllers
 
             return View(model);
         }
-        
+
+        public ActionResult AddDropClass(int userId)
+        {
+            SchoolhubDb db = new SchoolhubDb();
+            User user = db.GetUserByUserId(userId);
+            ClassHomeModel model = new ClassHomeModel()
+            {
+                User = user,
+                Classes = db.GetAllClasses(),
+                Schools = db.GetAllSchools()
+            };
+            return View(model);
+        }
+
+        public ActionResult AddStudentClass(int userId)
+        {
+            SchoolhubDb db = new SchoolhubDb();
+            User user = db.GetUserByUserId(userId);
+            ClassHomeModel model = new ClassHomeModel()
+            {
+                User = user,
+                Classes = db.GetAllClasses(),
+                Schools = db.GetAllSchools()
+            };
+            return View(model);
+        }
+
+        public JsonResult DropStudentClass(Class inClass)
+        {
+            SchoolhubDb db = new SchoolhubDb();
+            bool result = db.AddClass(inClass);
+            if (result == true)
+            {
+                return Json(new { message = "" });
+            }
+            else
+            {
+                return Json(new { message = result });
+            }
+        }
+
+        public JsonResult EnrollStudentInClass(int userId, int ClassId)
+        {
+            //User theUser = user;
+            SchoolhubDb db = new SchoolhubDb();
+            bool result = db.EnrollStudentInClass(userId, ClassId);
+            if (result == true)
+            {
+                return Json(new { message = "" });
+            }
+            else
+            {
+                return Json(new { message = result });
+            }
+        }
+
         public bool DropClass(int userId, int classId)
         {
             SchoolhubDb db = new SchoolhubDb();
