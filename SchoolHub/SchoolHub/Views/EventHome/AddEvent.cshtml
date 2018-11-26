@@ -25,7 +25,7 @@
                 <h2>Add Event to Class</h2>
             </div>
             <div class="col-md-6">
-                @Html.ActionLink("Go Back", "EventHome", new { ClassId = Model.Class.Id }, new { @class = "btn btn-primary " })
+                @Html.ActionLink("Go Back", "EventHome", new { ClassId = Model.Class.Id, userId = Model.User.Id }, new { @class = "btn btn-primary " })
             </div>
         </div>
         <div class="container">
@@ -101,7 +101,9 @@
                         alert(out.message)
                     }
                     else {
-                        var url = '@Url.Action("EventHome", "EventHome", new {ClassId = Model.Class.Id })';
+                        @* var url = '@Url.Action("EventHome", "EventHome", new {ClassId = Model.Class.Id, userId = Model.User.Id })'; *@
+                        var url = '@Url.Action("EventHome", "EventHome")?ClassId='+@Model.Class.Id+'&userId='+@Model.User.Id;
+
                         window.location.href = url;
                     }
                 },

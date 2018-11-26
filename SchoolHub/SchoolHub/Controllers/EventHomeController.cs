@@ -10,17 +10,17 @@ namespace SchoolHub.Controllers
 {
     public class EventHomeController : Controller
     {
-        public ActionResult EventHome(int ClassId)
+        public ActionResult EventHome(int ClassId, int userId)
         {
             SchoolhubDb db = new SchoolhubDb();
-            //User user = db.GetUserByUserId(userId);
+            User user = db.GetUserByUserId(userId);
             Class TempClass = new Class
             {
                 Id = ClassId
             };
             EventHomeModel model = new EventHomeModel
             {
-                //TempClass.Id = ClassId,
+                User = user,
                 Class = TempClass,
                 Classes = new List<Class>(),
                 Events = db.GetEventsByClassId(TempClass.Id),
@@ -41,15 +41,17 @@ namespace SchoolHub.Controllers
          }
         }
 
-        public ActionResult AddEvent(int ClassId)
+        public ActionResult AddEvent(int ClassId, int userId)
         {
             SchoolhubDb db = new SchoolhubDb();
+            User user = db.GetUserByUserId(userId);
             Class TempClass = new Class
             {
                 Id = ClassId
             };
             EventHomeModel model = new EventHomeModel
             {
+                User = user,
                 Class = TempClass,
                 EventTypes = db.GetAllEventTypes(),
             };

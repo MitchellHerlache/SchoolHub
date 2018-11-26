@@ -99,7 +99,7 @@
                     <td>@Html.DisplayFor(Model => Model.Classes[i].TeacherName)</td>
                     <td>@Html.DisplayFor(Model => Model.Classes[i].SchoolName)</td>
                     <td>
-                        @Html.ActionLink("View Events", "EventHome", "EventHome", new { ClassId = Model.Classes[i].Id}, new { @class = "btn btn-secondary " })
+                        @Html.ActionLink("View Events", "EventHome", "EventHome", new { ClassId = Model.Classes[i].Id, userId = Model.User.Id}, new { @class = "btn btn-secondary " })
                     </td>
                 </tr>
                 }
