@@ -403,7 +403,7 @@ public class SchoolhubDb
 
     public List<Event> GetEventsByStudentId(int studentId)
     {
-        string query = "SELECT `Event`.`Id`, `Description`, `StartDate`, `EndDate`, `Event`.`ClassId`, `UserId`, `TypeId` FROM `Event` LEFT JOIN `Enrollment` ON `Enrollment`.`ClassId` = `Event`.`ClassId` WHERE `Enrollment`.`StudentId` = @studentId OR `Event`.`UserId` = @studentId";
+        string query = "SELECT `Id`, `Description`, `StartDate`, `EndDate`, `ClassId`, `UserId`, `TypeId`, `Type`.`Name` FROM `Event` LEFT JOIN `Type` ON `Type`.`Id` = `Event`.`TypeId` LEFT JOIN `Enrollment` ON `Enrollment`.`ClassId` = `Event`.`ClassId` WHERE `Enrollment`.`StudentId` = @studentId OR `Event`.`UserId` = @studentId";
         MySqlConnection conn = null;
         MySqlCommand command = null;
         MySqlDataReader reader = null;
@@ -444,6 +444,7 @@ public class SchoolhubDb
                     newEvent.UserId = Convert.ToInt32(reader.GetValue(5));
                 }
                 newEvent.TypeId = Convert.ToInt32(reader.GetValue(6));
+                newEvent.Type = reader.GetValue(7).ToString();
                 events.Add(newEvent);
             }
             return events;
@@ -465,7 +466,7 @@ public class SchoolhubDb
 
     public List<Event> GetEventsByClassId(int classId)
     {
-        string query = "SELECT `Id`, `Description`, `StartDate`, `EndDate`, `ClassId`, `UserId`, `TypeId` FROM `Event` WHERE `Event`.`ClassId` = @classId";
+        string query = "SELECT `Id`, `Description`, `StartDate`, `EndDate`, `ClassId`, `UserId`, `TypeId`, `Type`.`Name` FROM `Event` LEFT JOIN `Type` ON `Type`.`Id` = `Event`.`TypeId` WHERE `Event`.`ClassId` = @classId";
         MySqlConnection conn = null;
         MySqlCommand command = null;
         MySqlDataReader reader = null;
@@ -508,7 +509,7 @@ public class SchoolhubDb
                     newEvent.UserId = Convert.ToInt32(reader.GetValue(5));
                 }
                 newEvent.TypeId = Convert.ToInt32(reader.GetValue(6));
-                newEvent.TypeId = Convert.ToInt32(reader.GetValue(6));
+                newEvent.Type = reader.GetValue(7).ToString();
                 events.Add(newEvent);
             }
             return events;

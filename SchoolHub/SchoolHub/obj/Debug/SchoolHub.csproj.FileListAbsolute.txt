@@ -560,3 +560,4 @@ C:\Users\John\UW Oshkosh CS\SchoolHub\SchoolHub\SchoolHub\bin\MySql.Web.dll
 C:\Users\John\UW Oshkosh CS\SchoolHub\SchoolHub\SchoolHub\obj\Debug\SchoolHub.csproj.CopyComplete
 C:\Users\John\UW Oshkosh CS\SchoolHub\SchoolHub\SchoolHub\obj\Debug\SchoolHub.dll
 C:\Users\John\UW Oshkosh CS\SchoolHub\SchoolHub\SchoolHub\obj\Debug\SchoolHub.pdb
+C:\Users\John\UW Oshkosh CS\SchoolHub\SchoolHub\SchoolHub\obj\Debug\SchoolHub.csprojAssemblyReference.cache
