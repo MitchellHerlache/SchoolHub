@@ -13,7 +13,6 @@ namespace SchoolHub.Controllers
         public ActionResult EventHome(int ClassId)
         {
             SchoolhubDb db = new SchoolhubDb();
-
             //User user = db.GetUserByUserId(userId);
             Class TempClass = new Class
             {
