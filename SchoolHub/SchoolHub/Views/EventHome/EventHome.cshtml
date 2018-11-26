@@ -40,9 +40,8 @@
 
 <body>
     <div class="jumbotron">
-        <a class="btn btn-secondary" href="AddEvent">Add Event</a>
         @* @Html.ActionLink("Add Event", "AddEvent", new { ClassId = Model.Class.Id }, new { @class = "nav-link  " })*@
-        @Html.ActionLink("Add Event", "AddEvent", null, new { @class = "nav-link  " })
+        @Html.ActionLink("Add Event", "AddEvent", new { ClassId = Model.Class.Id }, new { @class = "btn btn-secondary  " })
         @Html.ActionLink("Go back", "TeacherHome", "TeacherHomeIndex", null, new { @class = "btn btn-secondary " })
        @* @Html.ActionLink("Go back", "TeacherHome", "TeacherHomeIndex", new { userId = Model.User.Id }, new { @class = "btn btn-secondary " })*@
         <table id="example" class="table table-striped table-bordered" style="width:100%">

@@ -22,10 +22,10 @@
     <div class="jumbotron">
         <div class="row">
             <div class="col-md-6">
-                <h2>Add Event</h2>
+                <h2>Add Event to Class</h2>
             </div>
             <div class="col-md-6">
-                @Html.ActionLink("Go Back", "EventHome", new { ClassId = 1 }, new { @class = "btn btn-primary " })
+                @Html.ActionLink("Go Back", "EventHome", new { ClassId = Model.Class.Id }, new { @class = "btn btn-primary " })
             </div>
         </div>
         <div class="container">
@@ -36,90 +36,84 @@
                         <select id="Type" class="form-control">
                             @for (int i = 0; i < Model.EventTypes.Count; i++)
                             {
-                                //<option value="Model.EventTypes[i].id">
-                             //   @Html.DisplayFor(Model => Model.EventTypes[i].Name) 
-                              //  </option>
-                            }
-                            <option value="1" selected>Homework</option>
-                            <option value="2">Assignment</option>
-                            <option value="3">Lab</option>
-                            <option value="4">Exam</option>
-                            <option value="5">Participation Activity</option>
-                        </select>
-                    </div>
-                    <div class="form-group col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                        <label for="StartDate">Start Date:</label>
-                        <input class="form-control col-lg-12 col-md-12" type="date" name="StartDate" id="StartDate" placeholder="11/07/2018">
-                    </div>
-
-                    <div class="form-group col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                        <label for="EndDate">Start Date:</label>
-                        <input class="form-control col-lg-12 col-md-12" type="date" name="EndDate" id="EndDate" placeholder="11/07/2018">
-                    </div>
+                            <option value="@Model.EventTypes[i].Value">
+                                @Html.DisplayFor(Model => Model.EventTypes[i].Label)
+                            </option>
+                        }
+                    </select>
+                </div>
+                <div class="form-group col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                    <label for="StartDate">Start Date:</label>
+                    <input class="form-control col-lg-12 col-md-12" type="date" name="StartDate" id="StartDate" placeholder="11/07/2018">
                 </div>
 
-                <div class="form-group">
-                    <label for="EventDescription">Event Description:</label>
-                    <textarea class="form-control col-lg-12 col-md-12" rows="3" name="EventDescription" id="EventDescription" placeholder="Description goes here"></textarea>
+                <div class="form-group col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                    <label for="EndDate">Start Date:</label>
+                    <input class="form-control " type="date" name="EndDate" id="EndDate" placeholder="11/07/2018">
                 </div>
+            </div>
 
-                <div class="form-group">
-                    <button class="btn btn-lg btn-primary btn-block" type="submit" id="Submit">Add Event</button>
-                </div>
-            </form>
-        </div>
+            <div class="form-group">
+                <label for="EventDescription">Event Description:</label>
+                <textarea class="form-control " rows="3" name="EventDescription" id="EventDescription" placeholder="Description goes here"></textarea>
+            </div>
+
+            <div class="form-group">
+                <button class="btn btn-lg btn-primary btn-block" type="submit" id="Submit">Add Event</button>
+            </div>
+        </form>
     </div>
+</div>
 
-    <script>
-        $(function () {
-            if (!Modernizr.inputtypes['date']) {
-                $('input[type=date]').datepicker({
-                    dateFormat: 'mm-dd-yy'
-                });
-            }
-        });
-    </script>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-
-    <script>
-        @*$(document).ready(function () {
-            $("#Submit").click(function (e) {
-                var teacherid = getCookie("userId");
-                var newClass = {
-                    classNumber: $("#ClassNumber").val(),
-                    className: $("#ClassName").val(),
-                    classDescription: $("#ClassDescription").val(),
-                    startDate: $("#StartDate").val(),
-                    endDate: $("#EndDate").val(),
-                    teacherId: teacherid,
-                    schoolId: $("#SchoolId").val()
-                }
-                $.ajax({
-                    type: "POST",
-                    url: "/TeacherHome/AddNewEvent",
-                    contentType: "application/json; charset=utf-8",
-                    data: JSON.stringify({ 'inClass': newClass }),
-                    dataType: "json",
-                    success: function (result, status, xhr) {
-                        out = result;
-                        if (out.message != "") {
-                            alert(out.message)
-                        }
-                        else {
-                            var url = '@Url.Action("TeacherHomeIndex", "TeacherHome", new {userId = Model.User.Id })';
-                            window.location.href = url;
-                        }
-                    },
-                    error: function (xhr, status, error) {
-                        alert("Issue occured while adding a class")
-                    }
-                });
-                return false;
+<script>
+    $(function () {
+        if (!Modernizr.inputtypes['date']) {
+            $('input[type=date]').datepicker({
+                dateFormat: 'mm-dd-yy'
             });
-        });*@
+        }
+    });
+</script>
 
-    </script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
+<script>
+      $(document).ready(function () {
+        $("#Submit").click(function (e) {
+            var teacherid = getCookie("userId");
+            var newEvent = {
+                Description: $("#EventDescription").val(),
+                TypeId: $("#Type").val(),
+                StartDate: $("#StartDate").val(),
+                EndDate: $("#EndDate").val(),
+                UserId: teacherid,
+                ClassId: @Model.Class.Id,
+            }
+            $.ajax({
+                type: "POST",
+                url: "/EventHome/AddNewEvent",
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify({ 'InEvent': newEvent }),
+                dataType: "json",
+                success: function (result, status, xhr) {
+                    out = result;
+                    if (out.message != "") {
+                        alert(out.message)
+                    }
+                    else {
+                        var url = '@Url.Action("EventHome", "EventHome", new {ClassId = Model.Class.Id })';
+                        window.location.href = url;
+                    }
+                },
+                error: function (xhr, status, error) {
+                    alert("Issue occured while adding a class")
+                }
+            });
+            return false;
+        });
+    });
+
+</script>
 
 </body>
 </html>
