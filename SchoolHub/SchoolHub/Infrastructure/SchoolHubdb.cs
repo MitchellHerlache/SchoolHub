@@ -403,7 +403,7 @@ public class SchoolhubDb
 
     public List<Event> GetEventsByStudentId(int studentId)
     {
-        string query = "SELECT `Id`, `Description`, `StartDate`, `EndDate`, `ClassId`, `UserId`, `TypeId`, `Type`.`Name` FROM `Event` LEFT JOIN `Type` ON `Type`.`Id` = `Event`.`TypeId` LEFT JOIN `Enrollment` ON `Enrollment`.`ClassId` = `Event`.`ClassId` WHERE `Enrollment`.`StudentId` = @studentId OR `Event`.`UserId` = @studentId";
+        string query = "SELECT `Event`.`Id`, `Event`.`Description`, `Event`.`StartDate`, `Event`.`EndDate`, `Event`.`ClassId`, `UserId`, `TypeId`, `Type`.`Name`, `Class`.`Name` FROM `Event` LEFT JOIN `Type` ON `Type`.`Id` = `Event`.`TypeId` LEFT JOIN `Enrollment` ON `Enrollment`.`ClassId` = `Event`.`ClassId` LEFT JOIN `Class` ON `Class`.`Id` = `Event`.`ClassId` WHERE `Enrollment`.`StudentId` = @studentId OR `Event`.`UserId` = @studentId";
         MySqlConnection conn = null;
         MySqlCommand command = null;
         MySqlDataReader reader = null;
@@ -426,7 +426,7 @@ public class SchoolhubDb
                     newEvent.EndDate = null;
                 } else
                 {
-                    newEvent.EndDate = reader.GetDateTime(2);
+                    newEvent.EndDate = reader.GetDateTime(3);
                 }
                 if(reader.GetValue(4).Equals(null))
                 {
@@ -445,6 +445,14 @@ public class SchoolhubDb
                 }
                 newEvent.TypeId = Convert.ToInt32(reader.GetValue(6));
                 newEvent.Type = reader.GetValue(7).ToString();
+                if (reader.GetValue(8).Equals(null))
+                {
+                    newEvent.ClassName = "Self Made";
+                }
+                else
+                {
+                    newEvent.ClassName = reader.GetValue(8).ToString();
+                }
                 events.Add(newEvent);
             }
             return events;
@@ -466,7 +474,7 @@ public class SchoolhubDb
 
     public List<Event> GetEventsByClassId(int classId)
     {
-        string query = "SELECT `Id`, `Description`, `StartDate`, `EndDate`, `ClassId`, `UserId`, `TypeId`, `Type`.`Name` FROM `Event` LEFT JOIN `Type` ON `Type`.`Id` = `Event`.`TypeId` WHERE `Event`.`ClassId` = @classId";
+        string query = "SELECT `Event`.`Id`, `Description`, `StartDate`, `EndDate`, `ClassId`, `UserId`, `TypeId`, `Type`.`Name` FROM `Event` LEFT JOIN `Type` ON `Type`.`Id` = `Event`.`TypeId` WHERE `Event`.`ClassId` = @classId";
         MySqlConnection conn = null;
         MySqlCommand command = null;
         MySqlDataReader reader = null;
@@ -490,7 +498,7 @@ public class SchoolhubDb
                 }
                 else
                 {
-                    newEvent.EndDate = reader.GetDateTime(2);
+                    newEvent.EndDate = reader.GetDateTime(3);
                 }
                 if (reader.GetValue(4).Equals(null))
                 {

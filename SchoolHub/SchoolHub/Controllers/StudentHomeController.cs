@@ -15,18 +15,12 @@ namespace SchoolHub.Controllers
         {
             SchoolhubDb db = new SchoolhubDb();
             User user = db.GetUserByUserId(userId);
-            /*
+            
             StudentHomeModel thisModel = new StudentHomeModel()
             {
                 User = user,
                 Events = db.GetEventsByStudentId(user.Id),
                 Classes = db.GetClassesByStudentId(user.Id)
-            };*/
-
-            // being used to test the filter, switch back to other after.
-            StudentHomeModel thisModel = new StudentHomeModel()
-            {
-                User = user
             };
 
             return View(thisModel);
@@ -37,17 +31,12 @@ namespace SchoolHub.Controllers
             SchoolhubDb db = new SchoolhubDb();
             User user = db.GetUserByUserId(userId);
 
-            /*
+            
             StudentHomeModel thisModel = new StudentHomeModel()
             {
                 User = user,
                 Events = db.GetEventsByStudentId(user.Id),
                 Classes = db.GetClassesByStudentId(user.Id)
-            };*/
-
-            StudentHomeModel thisModel = new StudentHomeModel()
-            {
-                User = user
             };
 
             return View(thisModel);
@@ -74,6 +63,7 @@ namespace SchoolHub.Controllers
             {
                 User = user,
                 Classes = db.GetAllClasses(),
+                EnrolledClasses = db.GetClassesByStudentId(userId),
                 Schools = db.GetAllSchools()
             };
             return View(model);
@@ -87,6 +77,7 @@ namespace SchoolHub.Controllers
             {
                 User = user,
                 Classes = db.GetAllClasses(),
+                EnrolledClasses = db.GetClassesByStudentId(userId),
                 Schools = db.GetAllSchools()
             };
             return View(model);

@@ -62,10 +62,10 @@
                 @for (int i = 0; i < Model.Events.Count; i++)
                 {
                     <tr>
-                        <td>@Html.DisplayFor(Model => Model.Events[i].TypeId)</td>
+                        <td>@Html.DisplayFor(Model => Model.Events[i].Type)</td>
                         <td>@Html.DisplayFor(Model => Model.Events[i].Description)</td>
-                        <td>@Html.DisplayFor(Model => Model.Events[i].StartDate)</td>
-                        <td>@Html.DisplayFor(Model => Model.Events[i].EndDate)</td>
+                        <td>@Html.DisplayFor(Model => Model.Events[i].StartDateString)</td>
+                        <td>@Html.DisplayFor(Model => Model.Events[i].EndDateString)</td>
                     </tr>
                 }
             </tbody>
