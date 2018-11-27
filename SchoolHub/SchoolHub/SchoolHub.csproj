@@ -338,7 +338,6 @@
     <Content Include="Views\TeacherHome\SignOut.cshtml" />
     <Content Include="Views\StudentHome\AddStudentClass.cshtml" />
     <Content Include="Views\StudentHome\StudentCalendar.cshtml" />
-    <Content Include="Views\TeacherHome\TeacherCalendar.cshtml" />
     <Content Include="Views\StudentHome\AddDropClass.cshtml" />
   </ItemGroup>
   <ItemGroup>

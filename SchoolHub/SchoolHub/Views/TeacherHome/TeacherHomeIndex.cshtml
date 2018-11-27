@@ -47,10 +47,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    @Html.ActionLink("Calendar", "TeacherCalendar", new { userId = Model.User.Id }, new { @class = "nav-link  " })
-                </li>
+            <ul class="navbar-nav mr-auto">                
                 <li class="nav-item">
                     @Html.ActionLink("Add Class", "AddClass", new { userId = Model.User.Id }, new { @class = "nav-link " })
                 </li>

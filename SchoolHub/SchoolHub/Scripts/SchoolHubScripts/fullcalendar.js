@@ -22,7 +22,6 @@
         aspectRatio: 1.35,
         header: {
             left: 'title',
-            center: '',
             right: 'today prev,next'
         },
         weekends: true,
