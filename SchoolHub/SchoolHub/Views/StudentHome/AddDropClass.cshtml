@@ -21,7 +21,6 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.1/css/responsive.bootstrap4.min.css">
 
 <nav class="navbar navbar-expand-md navbar-expand-sm navbar-dark bg-dark">
-    @Html.ActionLink("Home", "StudentHomeIndex", new { userId = Model.User.Id }, new { @class = "navbar-brand mr-auto" })
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse"
             aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -29,7 +28,10 @@
     <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                @Html.ActionLink("Calendar", "Calendar", new { userId = Model.User.Id }, new { @class = "nav-link" })
+                @Html.ActionLink("Home", "StudentHomeIndex", new { userId = Model.User.Id }, new { @class = "nav-link" })
+            </li>
+            <li class="nav-item">
+                @Html.ActionLink("Calendar", "StudentCalendar", new { userId = Model.User.Id }, new { @class = "nav-link" })
             </li>
             <li class="nav-item active">
                 <a class="nav-link" href="#">Classes</a>

@@ -32,6 +32,27 @@ namespace SchoolHub.Controllers
             return View(thisModel);
         }
 
+        public ActionResult StudentCalendar(int userId)
+        {
+            SchoolhubDb db = new SchoolhubDb();
+            User user = db.GetUserByUserId(userId);
+
+            /*
+            StudentHomeModel thisModel = new StudentHomeModel()
+            {
+                User = user,
+                Events = db.GetEventsByStudentId(user.Id),
+                Classes = db.GetClassesByStudentId(user.Id)
+            };*/
+
+            StudentHomeModel thisModel = new StudentHomeModel()
+            {
+                User = user
+            };
+
+            return View(thisModel);
+        }
+
         public ActionResult Classes(int userId)
         {
             SchoolhubDb db = new SchoolhubDb();

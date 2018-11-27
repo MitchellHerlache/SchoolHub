@@ -3,7 +3,7 @@
 @{
     ViewBag.Title = "Student Home Page";
 }
-<!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">-->
+
 <!--Required for all of this code -->
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.13.0/umd/popper.min.js"></script>
@@ -38,7 +38,7 @@
     <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="#">Calander</a> <!-- <span class="sr-only">(current)</span></a> -->
+                @Html.ActionLink("Calendar", "StudentCalendar", new { userId = Model.User.Id }, new { @class = "nav-link" })
             </li>
             <li class="nav-item">
                 @Html.ActionLink("Add Class", "AddDropClass", new { userId = Model.User.Id }, new { @class = "nav-link  " })
