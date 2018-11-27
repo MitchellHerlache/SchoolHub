@@ -69,19 +69,19 @@ namespace SchoolHub.Controllers
             return View(model);
         }
 
-        public ActionResult AddStudentClass(int userId)
-        {
-            SchoolhubDb db = new SchoolhubDb();
-            User user = db.GetUserByUserId(userId);
-            ClassHomeModel model = new ClassHomeModel()
-            {
-                User = user,
-                Classes = db.GetAllClasses(),
-                EnrolledClasses = db.GetClassesByStudentId(userId),
-                Schools = db.GetAllSchools()
-            };
-            return View(model);
-        }
+        //public ActionResult AddStudentClass(int userId)
+        //{
+        //    SchoolhubDb db = new SchoolhubDb();
+        //    User user = db.GetUserByUserId(userId);
+        //    ClassHomeModel model = new ClassHomeModel()
+        //    {
+        //        User = user,
+        //        Classes = db.GetAllClasses(),
+        //        EnrolledClasses = db.GetClassesByStudentId(userId),
+        //        Schools = db.GetAllSchools()
+        //    };
+        //    return View(model);
+        //}
 
         public JsonResult DropStudentClass(Class inClass)
         {
