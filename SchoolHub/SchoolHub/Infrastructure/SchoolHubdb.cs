@@ -482,7 +482,7 @@ public class SchoolhubDb
                 {
                     newEvent.ClassId = Convert.ToInt32(reader.GetValue(4));
                 }
-                if (reader.GetValue(5).Equals(null))
+                if (reader.GetValue(5).Equals(DBNull.Value))
                 {
                     newEvent.UserId = null;
                 }
@@ -555,7 +555,7 @@ public class SchoolhubDb
                 {
                     newEvent.ClassId = Convert.ToInt32(reader.GetValue(4));
                 }
-                if (reader.GetValue(5).Equals(null))
+                if (reader.GetValue(5).Equals(DBNull.Value))
                 {
                     newEvent.UserId = null;
                 }
