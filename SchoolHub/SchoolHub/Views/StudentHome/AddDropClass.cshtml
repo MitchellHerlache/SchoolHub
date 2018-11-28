@@ -91,7 +91,8 @@
                     <td>@cls.TeacherName</td>
                     <td>@cls.Description</td>
                     <td>
-                        <button value="@cls.Id" class="btn btn-secondary" id="DropClass" name="DropClass">Drop Class</button>
+                       @Html.ActionLink("Drop Class", "AddDropClass", "StudentHome", new { ClassId = cls.Id, userId = Model.User.Id }, new { @class = "btn btn-secondary " })
+                        @*<button value="@cls.Id" class="btn btn-secondary" id="DropClass" name="DropClass">Drop Class</button>*@
                     </td>
                 </tr>
             }

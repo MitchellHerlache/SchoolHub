@@ -41,7 +41,7 @@
                 @Html.ActionLink("Calendar", "StudentCalendar", new { userId = Model.User.Id }, new { @class = "nav-link" })
             </li>
             <li class="nav-item">
-                @Html.ActionLink("Classes", "AddDropClass", new { userId = Model.User.Id }, new { @class = "nav-link  " })
+                @Html.ActionLink("Classes", "AddDropClass", new { userId = Model.User.Id, classId = -1 }, new { @class = "nav-link  " })
             </li>
             <li class="nav-item">
                 @Html.ActionLink("Add Event", "AddStudentEvent", new { userId = Model.User.Id }, new { @class = "nav-link  " })
