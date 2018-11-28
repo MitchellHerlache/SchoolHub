@@ -391,7 +391,7 @@ public class SchoolhubDb
             command.Parameters.AddWithValue("@description", newEvent.Description);
             command.Parameters.AddWithValue("@startDate", newEvent.StartDate.ToString("yyyy-MM-dd"));
             command.Parameters.AddWithValue("@endDate", newEvent.EndDate.Equals(DateTime.MinValue) ? null : newEvent.EndDate.Value.ToString("yyyy-MM-dd"));
-            command.Parameters.AddWithValue("@classId", 6);
+            command.Parameters.AddWithValue("@classId", null);
             command.Parameters.AddWithValue("@userId", newEvent.UserId);
             command.Parameters.AddWithValue("@typeId", newEvent.TypeId);
             command.ExecuteNonQuery();
@@ -475,7 +475,7 @@ public class SchoolhubDb
                 {
                     newEvent.EndDate = reader.GetDateTime(3);
                 }
-                if(reader.GetValue(4).Equals(null))
+                if(reader.GetValue(4).Equals(DBNull.Value))
                 {
                     newEvent.ClassId = null;
                 } else
@@ -547,7 +547,7 @@ public class SchoolhubDb
                 {
                     newEvent.EndDate = reader.GetDateTime(3);
                 }
-                if (reader.GetValue(4).Equals(null))
+                if (reader.GetValue(4).Equals(DBNull.Value))
                 {
                     newEvent.ClassId = null;
                 }

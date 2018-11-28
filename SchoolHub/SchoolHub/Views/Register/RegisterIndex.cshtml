@@ -94,7 +94,8 @@
                                     var teacherId = out.user.Id;
                                     var url = '@Url.Action("TeacherHomeIndex", "TeacherHome")?userId=' + teacherId;
                                 } else {
-                                    var url = '@Url.Action("StudentHomeIndex", "StudentHome")';
+                                    var studentId = out.user.Id;
+                                    var url = '@Url.Action("StudentHomeIndex", "StudentHome")?userId=' + studentId;
                                 }
                                  window.location.href = url;
                             }
