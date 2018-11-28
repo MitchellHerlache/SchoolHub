@@ -155,6 +155,53 @@ public class SchoolhubDb
         return null;
     }
 
+    public List<Class> GetUnenrolledClassesByStudentId(int studentId)
+    {
+        string query = "SELECT `Class`.`Id`, `Number`, `Class`.`Name`, `Description`, `StartDate`, `EndDate`, `TeacherId`, `SchoolId`, CONCAT(`FirstName`,' ',`LastName`) AS `TeacherName`, `School`.`Name` FROM `Class` LEFT JOIN `School` ON `Class`.`SchoolId` = `School`.`Id` LEFT JOIN `User` ON `Class`.`TeacherId` = `User`.`Id` WHERE NOT EXISTS(SELECT * FROM `Enrollment` WHERE `ClassId` = `Class`.`Id` AND `StudentId` = @studentId) ORDER BY `Number` ASC";
+        MySqlConnection conn = null;
+        MySqlCommand command = null;
+        MySqlDataReader reader = null;
+        try
+        {
+            conn = new MySqlConnection(connectionString);
+            conn.Open();
+            command = new MySqlCommand(query, conn);
+            command.Parameters.AddWithValue("@studentId", studentId);
+            reader = command.ExecuteReader();
+            List<Class> classes = new List<Class>();
+            //Class newClass = new Class();
+            while (reader.Read())
+            {
+                Class newClass = new Class();
+                newClass.Id = Convert.ToInt32(reader.GetValue(0));
+                newClass.Number = reader.GetValue(1).ToString();
+                newClass.Name = reader.GetValue(2).ToString();
+                newClass.Description = reader.GetValue(3).ToString();
+                newClass.StartDate = reader.GetDateTime(4);
+                newClass.EndDate = reader.GetDateTime(5);
+                newClass.TeacherId = Convert.ToInt32(reader.GetValue(6));
+                newClass.SchoolId = Convert.ToInt32(reader.GetValue(7));
+                newClass.TeacherName = reader.GetValue(8).ToString();
+                newClass.SchoolName = reader.GetValue(9).ToString();
+                classes.Add(newClass);
+            }
+            return classes;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
+        finally
+        {
+            // We must assure the connection gets closed, even in the event of an exception.
+            if (conn != null && conn.State != ConnectionState.Closed)
+            {
+                conn.Close();
+            }
+        }
+        return null;
+    }
+
     public bool AddClass(Class newClass)
     {
         string query = "INSERT INTO `Class`(`Number`, `Name`, `Description`, `StartDate`, `EndDate`, `TeacherId`, `SchoolId`) VALUES (@classNumber,@className,@classDescription,@startDate,@endDate,@teacherId,@schoolId)";

@@ -90,7 +90,7 @@ namespace SchoolHub.Controllers
             ClassHomeModel model = new ClassHomeModel()
             {
                 User = user,
-                Classes = db.GetAllClasses(),
+                Classes = db.GetUnenrolledClassesByStudentId(userId),
                 EnrolledClasses = db.GetClassesByStudentId(userId),
                 Schools = db.GetAllSchools()
             };
