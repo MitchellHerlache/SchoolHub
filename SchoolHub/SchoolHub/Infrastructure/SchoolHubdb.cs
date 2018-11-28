@@ -344,7 +344,7 @@ public class SchoolhubDb
             command.Parameters.AddWithValue("@description", newEvent.Description);
             command.Parameters.AddWithValue("@startDate", newEvent.StartDate.ToString("yyyy-MM-dd"));
             command.Parameters.AddWithValue("@endDate", newEvent.EndDate.Equals(DateTime.MinValue) ? null : newEvent.EndDate.Value.ToString("yyyy-MM-dd"));
-            command.Parameters.AddWithValue("@classId", null);
+            command.Parameters.AddWithValue("@classId", 6);
             command.Parameters.AddWithValue("@userId", newEvent.UserId);
             command.Parameters.AddWithValue("@typeId", newEvent.TypeId);
             command.ExecuteNonQuery();
