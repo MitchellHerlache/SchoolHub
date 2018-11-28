@@ -1,4 +1,4 @@
-﻿@model SchoolHub.Models.EventHomeModel
+﻿@model SchoolHub.Models.ClassHomeModel
 
 @{
     ViewBag.Title = "School Hub Add Event";
@@ -14,8 +14,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
-    <!--  Needed for cookies to work -->
-    <script src="~/Scripts/SchoolHubScripts/Cookie.js"></script>
     <title>Add Event</title>
 </head>
 <body>
@@ -25,47 +23,46 @@
                 <h2>Add Event to Class</h2>
             </div>
             <div class="col-md-6">
-                @Html.ActionLink("Go Back", "EventHome", new { ClassId = Model.Class.Id, userId = Model.User.Id }, new { @class = "btn btn-primary " })
+                @Html.ActionLink("Go Back", "StudentHomeIndex", new { userId = Model.User.Id }, new { @class = "btn btn-primary " })
             </div>
         </div>
         <div class="container">
             <form>
-                <div class="row">
-                    <div class="form-group col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                    <div class="form-group">
                         <label for="Type">Select Event Type:</label>
                         <select id="Type" class="form-control">
                             @for (int i = 0; i < Model.EventTypes.Count; i++)
                             {
-                            <option value="@Model.EventTypes[i].Value">
-                                @Html.DisplayFor(Model => Model.EventTypes[i].Label)
-                            </option>
-                        }
-                    </select>
-                </div>
-                <div class="form-group col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                    <label for="StartDate">Start Date:</label>
-                    <input class="form-control col-lg-12 col-md-12" type="date" name="StartDate" id="StartDate" placeholder="11/07/2018">
-                </div>
+                                <option value="@Model.EventTypes[i].Value">
+                                    @Html.DisplayFor(Model => Model.EventTypes[i].Label)
+                                </option>
+                            }
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="EventDescription">Event Description:</label>
+                        <input class="form-control" name="EventDescription" id="EventDescription" placeholder="Description goes here">
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <label for="StartDate">Start Date:</label>
+                            <input class="form-control col-lg-12 col-md-12" type="date" name="StartDate" id="StartDate" placeholder="11/07/2018">
+                        </div>
 
-                <div class="form-group col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                    <label for="EndDate">End Date:</label>
-                    <input class="form-control " type="date" name="EndDate" id="EndDate" placeholder="11/07/2018">
-                </div>
-            </div>
+                        <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <label for="EndDate">End Date:</label>
+                            <input class="form-control " type="date" name="EndDate" id="EndDate" placeholder="11/07/2018">
+                        </div>
+                    </div>
 
-                <div class="form-group">
-                    <label for="EventDescription">Event Description:</label>
-                    <input class="form-control" name="EventDescription" id="EventDescription" placeholder="Description goes here">
-                </div>
-
-            <div class="form-group">
-                <button class="btn btn-lg btn-primary btn-block" type="submit" id="Submit">Add Event</button>
-            </div>
-        </form>
+                    <div class="form-group">
+                        <button class="btn btn-lg btn-primary btn-block" type="submit" id="Submit">Add Event</button>
+                    </div>
+            </form>
+        </div>
     </div>
-</div>
 
-<script>
+    <script>
     $(function () {
         if (!Modernizr.inputtypes['date']) {
             $('input[type=date]').datepicker({
@@ -73,25 +70,24 @@
             });
         }
     });
-</script>
+    </script>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 
-<script>
+    <script>
       $(document).ready(function () {
-        $("#Submit").click(function (e) {
-            var teacherid = getCookie("userId");
+          $("#Submit").click(function (e) {
+            var user = @Model.User.Id;
             var newEvent = {
                 Description: $("#EventDescription").val(),
                 TypeId: $("#Type").val(),
                 StartDate: $("#StartDate").val(),
                 EndDate: $("#EndDate").val(),
-                UserId: teacherid,
-                ClassId: @Model.Class.Id,
+                UserId: user
             }
             $.ajax({
                 type: "POST",
-                url: "/EventHome/AddNewEvent",
+                url: "/StudentHome/NewStudentEvent",
                 contentType: "application/json; charset=utf-8",
                 data: JSON.stringify({ 'InEvent': newEvent }),
                 dataType: "json",
@@ -101,9 +97,7 @@
                         alert(out.message)
                     }
                     else {
-                        @* var url = '@Url.Action("EventHome", "EventHome", new {ClassId = Model.Class.Id, userId = Model.User.Id })'; *@
-                        var url = '@Url.Action("EventHome", "EventHome")?ClassId='+@Model.Class.Id+'&userId='+@Model.User.Id;
-
+                        var url = '@Url.Action("StudentHomeIndex", "StudentHome", new {userId = Model.User.Id })';
                         window.location.href = url;
                     }
                 },
@@ -115,7 +109,7 @@
         });
     });
 
-</script>
+    </script>
 
 </body>
 </html>

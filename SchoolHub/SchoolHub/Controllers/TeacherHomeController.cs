@@ -47,27 +47,5 @@ namespace SchoolHub.Controllers
               return Json(new { message = result});
          }
         }
-
-        public ActionResult ChangePassword(int userId)
-        {
-            TeacherHomeModel model = new TeacherHomeModel();
-            User user = new User();
-            user.Id = userId;
-            model.User = user;
-            return View(model);
-        }
-
-        public JsonResult RegisterUser(User inUser, string password)
-        {
-            SchoolhubDb db = new SchoolhubDb();
-            User user = inUser;
-            string result = db.AddUser(inUser, password);
-            if (int.TryParse(result, out int x))
-            {
-                user.Id = int.Parse(result);
-                return Json(new { message = "", user = user });
-            }
-            return Json(new { message = result, user = user });
-        }
     }
 }

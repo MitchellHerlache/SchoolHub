@@ -39,7 +39,7 @@
         </ul>
         <ul class="navbar-nav">
             <li class="nav-item ">
-                <a class="nav-link" href="../Login/LoginIndex">Sign Out</a>
+                @Html.ActionLink("Sign Out", "LoginIndex", "Login", null, new { @class = "nav-link " })
             </li>
         </ul>
     </div>
@@ -66,7 +66,6 @@
                 </select>
             </div>
             <div class="col-sm">
-                @*@Html.ActionLink("Add Class", "AddStudentClass", new { userId = Model.User.Id }, new { @class = "btn-secondary btn" })*@
                 <button type="submit" id="Submit" class="btn btn-secondary">Add Class</button>
             </div>
         </div>
@@ -92,7 +91,7 @@
                     <td>@cls.TeacherName</td>
                     <td>@cls.Description</td>
                     <td>
-                        <button value="Drop">Drop</button>
+                        <button value="@cls.Id" class="btn btn-secondary" id="DropClass" name="DropClass">Drop Class</button>
                     </td>
                 </tr>
             }
@@ -110,7 +109,39 @@
     <script src="~/Scripts/SchoolHubScripts/DatatableModal.js"></script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    
+    @*Remove the user from a scheduled class*@
+    <script>
+        $(document).ready(function () {
+            $("#DropClass").click(function (e) {
+                var user = @Model.User.Id;
+                    $.ajax({
+                        type: "POST",
+                        url: "/StudentHome/DropStudentClass",
+                        contentType: "application/json; charset=utf-8",
+                        data: JSON.stringify({ 'userId': user, 'ClassId': $("#DropClass").val() }),
+                        dataType: "json",
+                        success: function (result, status, xhr) {
+                            out = result;
+                            if (out.message != "") {
+                                alert(out.message)
+                            }
+                            else {
+                                var url = '@Url.Action("AddDropClass", "StudentHome")?userId='+user;
+                                window.location.href = url;
+                            }
+                        },
+                        error: function (xhr, status, error) {
+                            alert("Issue occured while dropping a class")
+                        }
+                    });
+                return false;
+            });
+        });
 
+    </script>
+
+    @*Schedule the user for a new class*@
     <script>
         $(document).ready(function () {
             $("#Submit").click(function (e) {

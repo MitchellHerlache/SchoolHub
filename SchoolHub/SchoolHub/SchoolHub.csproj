@@ -330,13 +330,13 @@
     <Content Include="Views\Login\LoginIndex.cshtml" />
     <Content Include="Views\StudentHome\StudentHomeIndex.cshtml" />
     <Content Include="Views\TeacherHome\TeacherHomeIndex.cshtml" />
-    <Content Include="Views\TeacherHome\ChangePassword.cshtml" />
     <Content Include="Views\TeacherHome\AddClass.cshtml" />
     <Content Include="Views\EventHome\EventHome.cshtml" />
     <Content Include="Views\EventHome\AddEvent.cshtml" />
     <Content Include="Views\TeacherHome\SignOut.cshtml" />
     <Content Include="Views\StudentHome\StudentCalendar.cshtml" />
     <Content Include="Views\StudentHome\AddDropClass.cshtml" />
+    <Content Include="Views\StudentHome\AddStudentEvent.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
