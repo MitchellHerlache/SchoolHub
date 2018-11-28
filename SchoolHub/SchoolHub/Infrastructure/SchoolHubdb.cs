@@ -341,7 +341,7 @@ public class SchoolhubDb
     #region Events
     public List<SelectItem> GetAllEventTypes()
     {
-        string query = "SELECT `Id`, `Name` FROM `Type`";
+        string query = "SELECT `Id`, `Name` FROM `Type` WHERE `Name` <> 'Self Assigned'";
         MySqlConnection conn = null;
         MySqlCommand command = null;
         MySqlDataReader reader = null;
@@ -393,7 +393,7 @@ public class SchoolhubDb
             command.Parameters.AddWithValue("@endDate", newEvent.EndDate.Equals(DateTime.MinValue) ? null : newEvent.EndDate.Value.ToString("yyyy-MM-dd"));
             command.Parameters.AddWithValue("@classId", null);
             command.Parameters.AddWithValue("@userId", newEvent.UserId);
-            command.Parameters.AddWithValue("@typeId", newEvent.TypeId);
+            command.Parameters.AddWithValue("@typeId", 6);
             command.ExecuteNonQuery();
             return true;
         }
