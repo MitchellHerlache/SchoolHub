@@ -58,7 +58,7 @@
                     right: 'prev,next today'
                 },
                 editable: true,
-                firstDay: 1, //  1(Monday) this can be changed to 0(Sunday) for the USA system
+                firstDay: 0, //  1(Monday) this can be changed to 0(Sunday) for the USA system
                 selectable: true,
                 defaultView: 'month',
 
@@ -120,9 +120,18 @@
                     @for (int i = 0; i < Model.Events.Count; i++)
                     {
                         @:{
+                        if (Model.Events[i].ClassName.Equals(string.Empty))
+                        {
+                            @:title: '@Model.Events[i].Description',
+                        }
+                        else
+                        {
                             @:title: '@Model.Events[i].ClassName: @Model.Events[i].Description',
+                        }
+
                             @:start: new Date(@Model.Events[i].EndDate.Value.Year,@Model.Events[i].EndDate.Value.Month - 1, @Model.Events[i].EndDate.Value.Day, @Model.Events[i].EndDate.Value.Hour, @Model.Events[i].EndDate.Value.Minute),
-                            @:allDay: true
+                            @:allDay: true,
+                            @:className: 'important'
 
                         @:},
                     }
@@ -202,6 +211,10 @@
                 </li>
                 <li class="nav-item">
                     @Html.ActionLink("Classes", "AddDropClass", new { userId = Model.User.Id }, new { @class = "nav-link  " })
+                </li>
+
+                <li class="nav-item">
+                    @Html.ActionLink("Add Event", "AddStudentEvent", new { userId = Model.User.Id }, new { @class = "nav-link  " })
                 </li>
             </ul>
             <ul class="navbar-nav">

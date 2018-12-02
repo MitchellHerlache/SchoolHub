@@ -2449,11 +2449,13 @@
         -----------------------------------------------------------*/
 
 
+        //function dayBind(days) {
+        //    days.click(dayClick)
+        //        .mousedown(daySelectionMousedown);
+        //}
         function dayBind(days) {
-            days.click(dayClick)
-                .mousedown(daySelectionMousedown);
+            
         }
-
 
         function dayClick(ev) {
             if (!opt('selectable')) { // if selectable, SelectionManager will worry about dayClick
