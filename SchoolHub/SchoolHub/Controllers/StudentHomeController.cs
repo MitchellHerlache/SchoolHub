@@ -82,21 +82,7 @@ namespace SchoolHub.Controllers
 
             return View(model);
         }
-
-        //public ActionResult AddDropClass(int userId)
-        //{
-        //    SchoolhubDb db = new SchoolhubDb();
-        //    User user = db.GetUserByUserId(userId);
-        //    ClassHomeModel model = new ClassHomeModel()
-        //    {
-        //        User = user,
-        //        Classes = db.GetUnenrolledClassesByStudentId(userId),
-        //        EnrolledClasses = db.GetClassesByStudentId(userId),
-        //        Schools = db.GetAllSchools()
-        //    };
-        //    return View(model);
-        //}
-
+        
         public ActionResult AddDropClass(int userId, int classId = -1)
         {
             SchoolhubDb db = new SchoolhubDb();
