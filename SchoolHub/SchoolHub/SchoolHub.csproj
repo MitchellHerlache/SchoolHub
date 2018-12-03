@@ -264,6 +264,7 @@
     <Content Include="css\fullcalendar.css" />
     <Content Include="css\fullcalendar.print.css" />
     <Content Include="css\loginAndRegister.css" />
+    <Content Include="css\TeacherStyle.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />

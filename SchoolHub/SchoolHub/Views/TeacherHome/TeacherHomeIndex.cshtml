@@ -35,11 +35,7 @@
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.1/css/responsive.bootstrap4.min.css">
-    <style>
-        .jumbotron {
-            background-color: lightblue;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="~/css/TeacherStyle.css" />
     <script src="~/Scripts/SchoolHubScripts/Cookie.js"></script>
 </head>
 
@@ -93,7 +89,7 @@
                     <td>@Html.DisplayFor(Model => Model.Classes[i].TeacherName)</td>
                     <td>@Html.DisplayFor(Model => Model.Classes[i].SchoolName)</td>
                     <td>
-                        @Html.ActionLink("View Events", "EventHome", "EventHome", new { ClassId = Model.Classes[i].Id, userId = Model.User.Id}, new { @class = "btn btn-secondary " })
+                        @Html.ActionLink("View Events", "EventHome", "EventHome", new { ClassId = Model.Classes[i].Id, userId = Model.User.Id}, new { @class = "btn btn-primary " })
                     </td>
                 </tr>
                 }

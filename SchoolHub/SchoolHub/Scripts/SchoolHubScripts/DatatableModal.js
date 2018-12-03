@@ -11,11 +11,9 @@
                 }),
                 renderer: $.fn.dataTable.Responsive.renderer.tableAll({
                     tableClass: 'table'
-
                 })
             }
         },
         colReorder: true,
-        // "order": [[3, "desc"]],
     });
 });

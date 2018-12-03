@@ -68,7 +68,7 @@
             {
                 <tr>
                     <td>@Html.DisplayFor(Model => Model.Events[i].Description)</td>
-                    <td>@Html.DisplayFor(Model => Model.Events[i].StartDateString)</td>
+                    <td value="@Model.Events[i].StartDate">@Html.DisplayFor(Model => Model.Events[i].StartDateString)</td>
                     <td>@Html.DisplayFor(Model => Model.Events[i].EndDateString)</td>
                     <td>@Html.DisplayFor(Model => Model.Events[i].ClassName)</td>
                     <td>@Html.DisplayFor(Model => Model.Events[i].Type)</td>

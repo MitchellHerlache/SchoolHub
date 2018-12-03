@@ -20,7 +20,7 @@
     <div class="jumbotron">
         <div class="row">
             <div class="col-md-6">
-                <h2>Add Event to Class</h2>
+                <h2>Add Personal Event</h2>
             </div>
             <div class="col-md-6">
                 @Html.ActionLink("Go Back", "StudentHomeIndex", new { userId = Model.User.Id }, new { @class = "btn btn-primary " })
@@ -83,7 +83,8 @@
                 success: function (result, status, xhr) {
                     out = result;
                     if (out.message != "") {
-                        alert(out.message)
+                        alert("Something in your request was unable to be processed");
+                        //alert(out.message)
                     }
                     else {
                         var url = '@Url.Action("StudentHomeIndex", "StudentHome", new {userId = Model.User.Id })';

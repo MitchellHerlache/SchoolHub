@@ -96,7 +96,6 @@
                     <td>@cls.Description</td>
                     <td>
                        @Html.ActionLink("Drop Class", "AddDropClass", "StudentHome", new { ClassId = cls.Id, userId = Model.User.Id }, new { @class = "btn btn-secondary " })
-                        @*<button value="@cls.Id" class="btn btn-secondary" id="DropClass" name="DropClass">Drop Class</button>*@
                     </td>
                 </tr>
             }
@@ -119,7 +118,7 @@
     <script>
         $(document).ready(function () {
             $("#DropClass").click(function (e) {
-                var user = @Model.User.Id;
+                var User = @Model.User.Id;
                     $.ajax({
                         type: "POST",
                         url: "/StudentHome/DropStudentClass",
@@ -132,7 +131,7 @@
                                 alert(out.message)
                             }
                             else {
-                                var url = '@Url.Action("AddDropClass", "StudentHome")?userId='+user;
+                                var url = '@Url.Action("AddDropClass", "StudentHome")?userId='+User;
                                 window.location.href = url;
                             }
                         },
