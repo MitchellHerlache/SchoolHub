@@ -11,6 +11,6 @@
     "\\SchoolHub\\SchoolHub\\Views\\StudentHome",
     "\\SchoolHub\\SchoolHub\\Views\\TeacherHome"
   ],
-  "SelectedNode": "\\SchoolHub\\SchoolHub.sln",
+  "SelectedNode": "\\SchoolHub\\SchoolHub\\Models\\TeacherHomeModel.cs",
   "PreviewInSolutionExplorer": false
 }

@@ -11,6 +11,7 @@ namespace SchoolHub.Controllers
     public class LoginController : Controller
     {
         SchoolhubDb db = new SchoolhubDb();
+
         public ActionResult LoginIndex()
         {
             return View();
@@ -19,6 +20,7 @@ namespace SchoolHub.Controllers
         public JsonResult CheckUserLogin(string username, string password)
         {
             User user = this.db.GetUserByUsernamePassword(username, password);
+
             if(user == null)
             {
                 return Json(new {message = "Incorrect username or password" });

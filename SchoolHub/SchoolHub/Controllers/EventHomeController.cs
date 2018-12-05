@@ -18,6 +18,7 @@ namespace SchoolHub.Controllers
             {
                 Id = ClassId
             };
+
             EventHomeModel model = new EventHomeModel
             {
                 User = user,
@@ -30,15 +31,16 @@ namespace SchoolHub.Controllers
 
         public JsonResult AddNewEvent(Event InEvent)
         {
-           SchoolhubDb db = new SchoolhubDb();
-           bool result = db.AddClassEvent(InEvent);
-           if (result == true)
-           {
-              return Json(new { message = ""});
-         } else
-         {
-              return Json(new { message = result});
-         }
+            SchoolhubDb db = new SchoolhubDb();
+            bool result = db.AddClassEvent(InEvent);
+
+            if (result == true)
+            {
+                return Json(new { message = ""});
+            } else
+            {
+                return Json(new { message = result});
+            }
         }
 
         public ActionResult AddEvent(int ClassId, int userId)
@@ -49,6 +51,7 @@ namespace SchoolHub.Controllers
             {
                 Id = ClassId
             };
+
             EventHomeModel model = new EventHomeModel
             {
                 User = user,

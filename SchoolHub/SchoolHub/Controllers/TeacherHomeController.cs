@@ -16,6 +16,7 @@ namespace SchoolHub.Controllers
         {
             SchoolhubDb db = new SchoolhubDb();
             User user = db.GetUserByUserId(userId);
+
             TeacherHomeModel model = new TeacherHomeModel
             {
                 Classes = db.GetClassesByTeacherId(user.Id),
@@ -32,20 +33,22 @@ namespace SchoolHub.Controllers
             User user = new User();
             user.Id = userId;
             model.User = user;
+
             return View(model);
         }
 
         public JsonResult AddNewClass(Class inClass)
         {
-           SchoolhubDb db = new SchoolhubDb();
-           bool result = db.AddClass(inClass);
-           if (result == true)
-           {
-              return Json(new { message = ""});
-         } else
-         {
-              return Json(new { message = result});
-         }
+            SchoolhubDb db = new SchoolhubDb();
+            bool result = db.AddClass(inClass);
+
+            if (result == true)
+            {
+                return Json(new { message = ""});
+            } else
+            {
+                return Json(new { message = result});
+            }
         }
     }
 }

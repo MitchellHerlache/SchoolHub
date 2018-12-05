@@ -10,9 +10,13 @@ namespace SchoolHub.Models
     public class TeacherHomeModel
     {
         public User User { get; set; }
+
         public List<SelectItem> Schools { get; set; }
+
         public List<Class> Classes { get; set; }
+
         public List<Event> Events { get; set; }
+
         public List<SelectItem> EventTypes { get; set; }
     }
 }

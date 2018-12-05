@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -31,7 +30,6 @@ namespace SchoolHub.Controllers
             SchoolhubDb db = new SchoolhubDb();
             User user = db.GetUserByUserId(userId);
 
-            
             StudentHomeModel thisModel = new StudentHomeModel()
             {
                 User = user,
@@ -45,6 +43,7 @@ namespace SchoolHub.Controllers
         {
             SchoolhubDb db = new SchoolhubDb();
             User user = db.GetUserByUserId(userId);
+
             ClassHomeModel model = new ClassHomeModel()
             {
                 User = user,
@@ -60,6 +59,7 @@ namespace SchoolHub.Controllers
         {
             SchoolhubDb db = new SchoolhubDb();
             bool result = db.AddStudentEvent(InEvent);
+
             if (result == true)
             {
                 return Json(new { message = "" });
@@ -86,11 +86,14 @@ namespace SchoolHub.Controllers
         public ActionResult AddDropClass(int userId, int classId = -1)
         {
             SchoolhubDb db = new SchoolhubDb();
+
             if (classId > 0)
             {
                 bool result = db.RemoveStudentFromClass(userId, classId);
             }
+
             User user = db.GetUserByUserId(userId);
+
             ClassHomeModel model = new ClassHomeModel()
             {
                 User = user,
@@ -105,6 +108,7 @@ namespace SchoolHub.Controllers
         {
             SchoolhubDb db = new SchoolhubDb();
             bool result = db.RemoveStudentFromClass(userId, ClassId);
+
             if (result == true)
             {
                 return Json(new { message = "" });
@@ -117,9 +121,9 @@ namespace SchoolHub.Controllers
 
         public JsonResult EnrollStudentInClass(int userId, int ClassId)
         {
-            //User theUser = user;
             SchoolhubDb db = new SchoolhubDb();
             bool result = db.EnrollStudentInClass(userId, ClassId);
+
             if (result == true)
             {
                 return Json(new { message = "" });

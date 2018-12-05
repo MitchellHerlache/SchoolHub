@@ -10,7 +10,9 @@ namespace SchoolHub.Models
     public class RegisterHomeModel
     {
         public User User { get; set; }
+
         public List<Class> Classes { get; set; }
+
         public List<Event> Events { get; set; }
 
     }
