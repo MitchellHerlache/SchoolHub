@@ -8,7 +8,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <title>School Hub Registration</title>
 </head>
 <body>
     <div class="jumbotron">
@@ -18,7 +17,7 @@
             <form>
                 <div class="row">
                     <div class="form-group col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                        <label for="firstName">Create Your Username:</label>
+                        <label for="Username">Create Your Username:</label>
                         <input class="form-control col-lg-12 col-md-12" type="text" name="Username" id="Username" placeholder="Enter your desired username" required>
                     </div>
 
@@ -33,18 +32,18 @@
 
                 <div class="row">
                     <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                        <label for="firstName">First Name:</label>
+                        <label for="FirstName">First Name:</label>
                         <input class="form-control col-lg-12 col-md-12" type="text" name="FirstName" id="FirstName" placeholder="Enter your first name" required>
                     </div>
 
                     <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                        <label for="lastName">Last Name:</label>
+                        <label for="LastName">Last Name:</label>
                         <input class="form-control col-lg-12 col-md-12" type="text" name="LastName" id="LastName" placeholder="Enter your last name" required>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label for="newEmail">Email Address:</label>
+                    <label for="Email">Email Address:</label>
                     <input class="form-control col-lg-12 col-md-12" type="email" name="Email" id="Email" placeholder="Enter your email address" required>
                 </div>
 
@@ -76,35 +75,32 @@
                     lastName: $("#LastName").val(),
                     roleId: $("#RoleId").val()
                 }
-                if (1 == 0)
-                    alert("Password must be more 8 characters or more.");
-                else {
-                    $.ajax({
-                        type: "POST",
-                        url: "/Register/RegisterUser",
-                        contentType: "application/json; charset=utf-8",
-                        data: JSON.stringify({'inUser': user, 'password': $("#Password").val() }),
-                        dataType: "json",
-                        success: function (result, status, xhr) {
-                            out = result;
-                            if (out.message != "") {
-                                alert(out.message)
+
+                $.ajax({
+                    type: "POST",
+                    url: "/Register/RegisterUser",
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify({'inUser': user, 'password': $("#Password").val() }),
+                    dataType: "json",
+                    success: function (result, status, xhr) {
+                        out = result;
+                        if (out.message != "") {
+                            alert(out.message)
+                        } else {
+                            if (out.user.RoleId == 1) {
+                                var teacherId = out.user.Id;
+                                var url = '@Url.Action("TeacherHomeIndex", "TeacherHome")?userId=' + teacherId;
                             } else {
-                                if (out.user.RoleId == 1) {
-                                    var teacherId = out.user.Id;
-                                    var url = '@Url.Action("TeacherHomeIndex", "TeacherHome")?userId=' + teacherId;
-                                } else {
-                                    var studentId = out.user.Id;
-                                    var url = '@Url.Action("StudentHomeIndex", "StudentHome")?userId=' + studentId;
-                                }
-                                 window.location.href = url;
+                                var studentId = out.user.Id;
+                                var url = '@Url.Action("StudentHomeIndex", "StudentHome")?userId=' + studentId;
                             }
-                        },
-                        error: function (xhr, status, error) {
-                            alert("Issue occured while registering")
+                                window.location.href = url;
                         }
-                    });
-                }
+                    },
+                    error: function (xhr, status, error) {
+                        alert("Issue occured while registering")
+                    }
+                });
                 return false;
             });
         });

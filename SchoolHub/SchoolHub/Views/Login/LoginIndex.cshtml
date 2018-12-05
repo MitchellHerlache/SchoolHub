@@ -7,9 +7,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-   @*<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">*@
-   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <title>School Hub Login</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 </head>
 <body>
 
@@ -24,7 +22,7 @@
                 </div>
 
                 <div class="form-group ">
-                    <label for="inputPassword">Password:</label>
+                    <label for="password">Password:</label>
                     <input class="form-control " type="password" id="password" name="password" placeholder="Enter your password">
                 </div>
 
@@ -40,48 +38,49 @@
             </div>
         </div>
     </div>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-    @*<script type="text/javascript" src="~/Scripts/SchoolHubScripts/Login.js"></script>*@
     <script src="~/Scripts/SchoolHubScripts/Cookie.js"></script>
+
     <script>
         $(document).ready(function () {
-    $("#submit").click(function (e) {
-        if ($("#username").val() == "")
-            alert("Username cannot be empty");
-        else if ($("#password").val() == "")
-            alert("Password cannot be empty");
-        else {
-            $.ajax({
-                type: "POST",
-                url: "/Login/CheckUserLogin",
-                contentType: "application/json; charset=utf-8",
-                data: '{"username":"' + $("#username").val() + '","password":"' + $("#password").val() + '"}',
-                dataType: "html",
-                success: function (result, status, xhr) {
-                    out = JSON.parse(result)
-                    if (out.message != "") {
-                        alert(out.message)
-                    } else {
-                        if (out.user.RoleId == 1) {
-                            var teacherId = out.user.Id;
-                            setCookie("userId", teacherId, 2);
-                            var url = '@Url.Action("TeacherHomeIndex", "TeacherHome")?userId='+teacherId;
+            $("#submit").click(function (e) {
+                if ($("#username").val() == "")
+                    alert("Username cannot be empty");
+                else if ($("#password").val() == "")
+                    alert("Password cannot be empty");
+                else {
+                    $.ajax({
+                        type: "POST",
+                        url: "/Login/CheckUserLogin",
+                        contentType: "application/json; charset=utf-8",
+                        data: '{"username":"' + $("#username").val() + '","password":"' + $("#password").val() + '"}',
+                        dataType: "html",
+                        success: function (result, status, xhr) {
+                            out = JSON.parse(result)
+                            if (out.message != "") {
+                                alert(out.message)
+                            } else {
+                                if (out.user.RoleId == 1) {
+                                    var teacherId = out.user.Id;
+                                    setCookie("userId", teacherId, 2);
+                                    var url = '@Url.Action("TeacherHomeIndex", "TeacherHome")?userId='+teacherId;
 
-                        } else {
-                            var studentId = out.user.Id;
-                            var url = '@Url.Action("StudentHomeIndex", "StudentHome")?userId='+studentId;
+                                } else {
+                                    var studentId = out.user.Id;
+                                    var url = '@Url.Action("StudentHomeIndex", "StudentHome")?userId='+studentId;
+                                }
+                                window.location.href = url;
+                            }
+                        },
+                        error: function (xhr, status, error) {
+                            alert("Issue occured while logging in")
                         }
-                        window.location.href = url;
-                    }
-                },
-                error: function (xhr, status, error) {
-                    alert("Issue occured while logging in")
+                    });
                 }
+                return false;
             });
-        }
-        return false;
-    });
-});
+        });
   
     </script>
 </body>

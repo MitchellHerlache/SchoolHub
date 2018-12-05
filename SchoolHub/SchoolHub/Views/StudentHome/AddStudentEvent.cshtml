@@ -67,13 +67,15 @@
       $(document).ready(function () {
           $("#Submit").click(function (e) {
             var user = @Model.User.Id;
+
             var newEvent = {
                 Description: $("#EventDescription").val(),
                 TypeId: $("#Type").val(),
                 StartDate: $("#StartDate").val(),
                 EndDate: $("#EndDate").val(),
                 UserId: user
-            }
+              }
+
             $.ajax({
                 type: "POST",
                 url: "/StudentHome/NewStudentEvent",
@@ -84,7 +86,6 @@
                     out = result;
                     if (out.message != "") {
                         alert("Something in your request was unable to be processed");
-                        //alert(out.message)
                     }
                     else {
                         var url = '@Url.Action("StudentHomeIndex", "StudentHome", new {userId = Model.User.Id })';
@@ -100,6 +101,5 @@
     });
 
     </script>
-
 </body>
 </html>

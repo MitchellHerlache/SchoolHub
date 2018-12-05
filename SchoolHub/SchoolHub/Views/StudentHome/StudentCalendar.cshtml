@@ -1,14 +1,59 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-
+    @*Load the css for the calander*@
     <link href='~/css/fullcalendar.css' rel='stylesheet' />
     <link href='~/css/fullcalendar.print.css' rel='stylesheet' media='print' />
+    <link rel="stylesheet" type="text/css" href="~/css/loadcalendar.css">
 
     <script src='~/Scripts/SchoolHubScripts/jquery-1.10.2.js'></script>
     <script src='~/Scripts/SchoolHubScripts/jquery-ui.custom.min.js'></script>
 
     <script src='~/Scripts/SchoolHubScripts/fullcalendar.js'></script>
+
+
+    
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-md navbar-expand-sm navbar-dark bg-dark">
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    @Html.ActionLink("Home", "StudentHomeIndex", new { userId = Model.User.Id }, new { @class = "nav-link  " })
+                </li>
+                <li class="nav-item">
+                    <a class="navbar-brand mr-auto" href="#">Calendar</a>
+                </li>
+                <li class="nav-item">
+                    @Html.ActionLink("Classes", "AddDropClass", new { userId = Model.User.Id }, new { @class = "nav-link  " })
+                </li>
+
+                <li class="nav-item">
+                    @Html.ActionLink("Add Event", "AddStudentEvent", new { userId = Model.User.Id }, new { @class = "nav-link  " })
+                </li>
+            </ul>
+            <ul class="navbar-nav">
+                <li class="nav-item ">
+                    @Html.ActionLink("Sign Out", "LoginIndex", "Login", null, new { @class = "nav-link " })
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="jumbotron">
+        <div id='wrap'>
+
+            <div id='calendar'></div>
+
+            <div style='clear:both'></div>
+        </div>
+    </div>
     <script>
 
         $(document).ready(function () {
@@ -137,98 +182,7 @@
                     }
                 ],
             });
-
-
         });
     </script>
-    <style>
-
-        #wrap {
-            width: 1100px;
-            margin: 0 auto;
-        }
-
-        #external-events {
-            float: left;
-            width: 150px;
-            padding: 0 10px;
-            text-align: left;
-        }
-
-            #external-events h4 {
-                font-size: 16px;
-                margin-top: 0;
-                padding-top: 1em;
-            }
-
-        .external-event { /* try to mimick the look of a real event */
-            margin: 10px 0;
-            padding: 2px 4px;
-            background: #3366CC;
-            color: #fff;
-            font-size: .85em;
-            cursor: pointer;
-        }
-
-        #external-events p {
-            margin: 1.5em 0;
-            font-size: 11px;
-            color: #666;
-        }
-
-            #external-events p input {
-                margin: 0;
-                vertical-align: middle;
-            }
-
-        #calendar {
-            /* 		float: right; */
-            margin: 0 auto;
-            width: 900px;
-            background-color: #FFFFFF;
-            border-radius: 6px;
-            box-shadow: 0 1px 2px #C3C3C3;
-        }
-    </style>
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.css">
-</head>
-<body>
-    <nav class="navbar navbar-expand-md navbar-expand-sm navbar-dark bg-dark">
-        
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    @Html.ActionLink("Home", "StudentHomeIndex", new { userId = Model.User.Id }, new { @class = "nav-link  " })
-                </li>
-                <li class="nav-item">
-                    <a class="navbar-brand mr-auto" href="#">Calendar</a>
-                </li>
-                <li class="nav-item">
-                    @Html.ActionLink("Classes", "AddDropClass", new { userId = Model.User.Id }, new { @class = "nav-link  " })
-                </li>
-
-                <li class="nav-item">
-                    @Html.ActionLink("Add Event", "AddStudentEvent", new { userId = Model.User.Id }, new { @class = "nav-link  " })
-                </li>
-            </ul>
-            <ul class="navbar-nav">
-                <li class="nav-item ">
-                    <a class="nav-link" href="../Login/LoginIndex">Sign Out</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
-
-    <div class="jumbotron">
-        <div id='wrap'>
-
-            <div id='calendar'></div>
-
-            <div style='clear:both'></div>
-        </div>
-    </div>
 </body>
 </html>
