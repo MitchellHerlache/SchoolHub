@@ -29,10 +29,12 @@ namespace SchoolHub.Controllers
         
         public ActionResult AddClass(int userId)
         {
+            SchoolhubDb db = new SchoolhubDb();
             TeacherHomeModel model = new TeacherHomeModel();
             User user = new User();
             user.Id = userId;
             model.User = user;
+            model.Schools = db.GetAllSchools();
 
             return View(model);
         }

@@ -64,6 +64,7 @@
                 <div class="col-sm">
                     School:
                     <select id="Schools">
+                        <option value="-1">Select a School</option>
                         @foreach (var item in Model.Schools)
                         {
                             <option value="@item.Value">@item.Label</option>
@@ -75,7 +76,7 @@
                     <select id="Classes" name="Classes">
                         @foreach (var cls in Model.Classes)
                         {
-                            <option value="@cls.Id">@cls.Name</option>
+                            <option value="@cls.Id" name="@cls.SchoolId">@cls.Name</option>
                         }
                     </select>
                 </div>
@@ -159,7 +160,8 @@
         <script>
         $(document).ready(function () {
             $("#Submit").click(function (e) {
-                var User = @Model.User.Id;
+                if ($("#Classes").val() > 0) {
+                    var User = @Model.User.Id;
 
                     $.ajax({
                         type: "POST",
@@ -173,7 +175,7 @@
                                 alert(out.message)
                             }
                             else {
-                                var url = '@Url.Action("AddDropClass", "StudentHome")?userId='+User;
+                                var url = '@Url.Action("AddDropClass", "StudentHome")?userId=' + User;
                                 window.location.href = url;
                             }
                         },
@@ -181,7 +183,35 @@
                             alert("Issue occurred while adding a class")
                         }
                     });
+                } else {
+                    alert("Please select a class");
+                }
                 return false;
+            });
+
+            var $options = $("#Classes").clone();
+            $("#Classes").html("");
+            $("#Schools").change(function () {
+                var filters = [];
+                if ($(this).val() == "") {
+                    $(this).find("option").each(function (index, option) {
+                        if ($(option).val() != "")
+                            filters.push($(option).val());
+                    });
+                } else {
+                    filters.push($(this).val())
+                }
+
+                $("#Classes").html("");
+
+                $.each(filters, function (index, value) {
+                    $options.find("option").each(function (optionIndex, option) {
+                        if ($(option).attr('name') == value)
+                            $(option).clone().appendTo($("#Classes"));
+                    });
+
+                });
+
             });
         });
 

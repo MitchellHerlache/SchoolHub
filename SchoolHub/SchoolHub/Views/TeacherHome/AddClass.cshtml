@@ -31,7 +31,10 @@
                     <div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
                         <label for="SchoolId">Select School:</label>
                         <select id="SchoolId" class="form-control">
-                            <option value="1" selected>UW Oshkosh</option>
+                            @foreach (var school in Model.Schools)
+                            {
+                                <option value="@school.Value">@school.Label</option>
+                            }
                         </select>
                     </div>
 
